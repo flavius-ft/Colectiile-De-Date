@@ -8,7 +8,6 @@ namespace ColectiiDeDate
 
         public IntArray()
         {
-            // construiește noul șir
         }
 
         public void Add(int element)
@@ -39,15 +38,7 @@ namespace ColectiiDeDate
         public bool Contains(int element)
         {
             // întoarce true dacă elementul dat există în șir
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (array[i] == element)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return IndexOf(element) >= 0;
         }
 
         public int IndexOf(int element)
@@ -69,10 +60,7 @@ namespace ColectiiDeDate
         {
             // adaugă un nou element pe poziția dată
             Array.Resize(ref array, array.Length + 1);
-            for (int i = array.Length - 1; i > index; i--)
-            {
-                array[i] = array[i - 1];
-            }
+            ShiftRight(index);
 
             array[index] = element;
         }
@@ -93,7 +81,7 @@ namespace ColectiiDeDate
             {
                 if (array[i] == element)
                 {
-                    array[i] = 0;
+                    RemoveAt(i);
                 }
             }
         }
@@ -101,7 +89,24 @@ namespace ColectiiDeDate
         public void RemoveAt(int index)
         {
             // șterge elementul de pe poziția dată
-            array[index] = 0;
+            ShiftLeft(index);
+            Array.Resize(ref array, array.Length - 1);
+        }
+
+        internal void ShiftRight(int index)
+        {
+            for (int i = array.Length - 1; i > index; i--)
+            {
+                array[i] = array[i - 1];
+            }
+        }
+
+        internal void ShiftLeft(int index)
+        {
+            for (int i = index; i < array.Length - 1; i++)
+            {
+                array[i] = array[i + 1];
+            }
         }
     }
 }
