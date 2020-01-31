@@ -130,6 +130,19 @@ namespace ColectiiDeDate
         }
 
         [Fact]
+        public void RemoveFirstAparitionForElement()
+        {
+            var array = new IntArray();
+            array.Add(5);
+            array.Add(5);
+            array.Add(2);
+
+            array.Remove(5);
+
+            Assert.Equal(1, array.IndexOf(2));
+        }
+
+        [Fact]
         public void RemoveAllElements()
         {
             var array = new IntArray();

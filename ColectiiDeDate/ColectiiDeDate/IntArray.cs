@@ -78,13 +78,7 @@ namespace ColectiiDeDate
         public void Remove(int element)
         {
             // șterge prima apariție a elementului din șir
-            for (int i = 0; i < array.Length; i++)
-            {
-                if (array[i] == element)
-                {
-                    RemoveAt(i);
-                }
-            }
+            RemoveAt(IndexOf(element));
         }
 
         public void RemoveAt(int index)
