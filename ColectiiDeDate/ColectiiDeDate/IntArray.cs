@@ -8,6 +8,7 @@ namespace ColectiiDeDate
 
         public IntArray()
         {
+            array = new int[0];
         }
 
         public void Add(int element)
@@ -68,9 +69,9 @@ namespace ColectiiDeDate
         public void Clear()
         {
             // șterge toate elementele din șir
-           for (int i = 0; i < array.Length; i++)
+           for (int i = array.Length - 1; i >= 0; i--)
             {
-                array[i] = 0;
+                RemoveAt(i);
             }
         }
 
