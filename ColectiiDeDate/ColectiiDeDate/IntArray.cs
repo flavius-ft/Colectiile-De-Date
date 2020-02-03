@@ -14,15 +14,9 @@ namespace ColectiiDeDate
 
         public int Count
         {
-            get
-            {
-                return array.Length;
-            }
+            get => array.Length;
 
-            private set
-            {
-                length = value;
-            }
+            private set => length = value;
         }
 
         public void Add(int element)
