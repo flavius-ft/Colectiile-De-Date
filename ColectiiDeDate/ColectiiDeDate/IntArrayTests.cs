@@ -173,5 +173,13 @@ namespace ColectiiDeDate
 
             Assert.Equal(9, array.Count());
         }
+
+        [Fact]
+        public void IndexOfTestsWithoutElements()
+        {
+            var array = new IntArray();
+
+            Assert.Equal(-1, array.IndexOf(0));
+        }
     }
 }
