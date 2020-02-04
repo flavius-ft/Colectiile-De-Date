@@ -64,7 +64,7 @@ namespace ColectiiDeDate
 
         public void Insert(int index, int element)
         {
-            Array.Resize(ref array, array.Length + 1);
+            Resize();
             ShiftRight(index);
 
             array[index] = element;

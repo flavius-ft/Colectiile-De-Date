@@ -66,7 +66,7 @@ namespace ColectiiDeDate
         }
 
         [Fact]
-        public void IntroduceANewElementOnAGivenIndex()
+        public void InsertNewElementOnAGivenIndex()
         {
             var array = new IntArray();
             array.Add(5);
