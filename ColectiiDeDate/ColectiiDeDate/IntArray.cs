@@ -5,24 +5,28 @@ namespace ColectiiDeDate
     class IntArray
     {
         private int[] array;
-        private int length;
+        private int count;
 
         public IntArray()
         {
-            array = new int[0];
+            array = new int[4];
         }
 
-        public int Count
+        public int Count()
         {
-            get => array.Length;
-
-            private set => length = value;
+            return count;
         }
 
         public void Add(int element)
         {
-            Array.Resize(ref array, array.Length + 1);
-            array[array.Length - 1] = element;
+            count++;
+
+            if (count == array.Length + 1)
+            {
+                Array.Resize(ref array, array.Length * 2);
+            }
+
+            array[count - 1] = element;
         }
 
         public int Element(int index)
@@ -63,7 +67,7 @@ namespace ColectiiDeDate
 
         public void Clear()
         {
-           for (int i = array.Length - 1; i >= 0; i--)
+           for (int i = count - 1; i >= 0; i--)
             {
                 RemoveAt(i);
             }
@@ -78,6 +82,7 @@ namespace ColectiiDeDate
         {
             ShiftLeft(index);
             Array.Resize(ref array, array.Length - 1);
+            count--;
         }
 
         internal void ShiftRight(int index)
