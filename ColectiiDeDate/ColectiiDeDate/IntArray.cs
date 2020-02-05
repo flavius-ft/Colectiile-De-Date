@@ -12,9 +12,12 @@ namespace ColectiiDeDate
             array = new int[4];
         }
 
-        public int Count()
+        public int Count
         {
+            get
+            {
             return countElements;
+            }
         }
 
         public void Resize()
@@ -72,10 +75,7 @@ namespace ColectiiDeDate
 
         public void Clear()
         {
-           for (int i = countElements - 1; i >= 0; i--)
-            {
-                RemoveAt(i);
-            }
+            countElements = 0;
         }
 
         public void Remove(int element)
@@ -86,7 +86,6 @@ namespace ColectiiDeDate
         public void RemoveAt(int index)
         {
             ShiftLeft(index);
-            Array.Resize(ref array, array.Length - 1);
             countElements--;
         }
 

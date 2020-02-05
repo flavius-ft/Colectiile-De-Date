@@ -20,7 +20,7 @@ namespace ColectiiDeDate
             array.Add(5);
             array.Add(2);
 
-            Assert.Equal(2, array.Count());
+            Assert.Equal(2, array.Count);
         }
 
         [Fact]
@@ -72,6 +72,7 @@ namespace ColectiiDeDate
             array.Add(5);
             array.Add(2);
             array.Add(3);
+            array.Add(2);
 
             array.Insert(1, 4);
 
@@ -100,7 +101,7 @@ namespace ColectiiDeDate
 
             array.RemoveAt(1);
 
-            Assert.Equal(1, array.Count());
+            Assert.Equal(1, array.Count);
         }
 
         [Fact]
@@ -126,7 +127,7 @@ namespace ColectiiDeDate
 
             array.Remove(2);
 
-            Assert.Equal(3, array.Count());
+            Assert.Equal(3, array.Count);
         }
 
         [Fact]
@@ -154,7 +155,7 @@ namespace ColectiiDeDate
 
             array.Clear();
 
-            Assert.Equal(0, array.Count());
+            Assert.Equal(0, array.Count);
         }
 
         [Fact]
@@ -171,7 +172,7 @@ namespace ColectiiDeDate
             array.Add(1);
             array.Add(2);
 
-            Assert.Equal(9, array.Count());
+            Assert.Equal(9, array.Count);
         }
 
         [Fact]
