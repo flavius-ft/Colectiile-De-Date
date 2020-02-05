@@ -20,6 +20,12 @@ namespace ColectiiDeDate
             }
         }
 
+        public int this[int index]
+        {
+            get => array[index];
+            set => array[index] = value;
+        }
+
         public void Resize()
         {
             if (countElements != array.Length)
@@ -35,16 +41,6 @@ namespace ColectiiDeDate
             Resize();
             array[countElements] = element;
             countElements++;
-        }
-
-        public int Element(int index)
-        {
-            return array[index];
-        }
-
-        public void SetElement(int index, int element)
-        {
-            array[index] = element;
         }
 
         public bool Contains(int element)

@@ -30,7 +30,7 @@ namespace ColectiiDeDate
             array.Add(5);
             array.Add(2);
 
-            Assert.Equal(2, array.Element(1));
+            Assert.Equal(2, array[1]);
         }
 
         [Fact]
@@ -40,9 +40,9 @@ namespace ColectiiDeDate
             array.Add(5);
             array.Add(2);
 
-            array.SetElement(0, 3);
+            array[0] = 3;
 
-            Assert.Equal(3, array.Element(0));
+            Assert.Equal(3, array[0]);
         }
 
         [Fact]
@@ -76,7 +76,7 @@ namespace ColectiiDeDate
 
             array.Insert(1, 4);
 
-            Assert.Equal(4, array.Element(1));
+            Assert.Equal(4, array[1]);
         }
 
         [Fact]
