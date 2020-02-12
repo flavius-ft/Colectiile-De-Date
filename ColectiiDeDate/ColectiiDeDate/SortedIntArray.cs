@@ -2,6 +2,11 @@
 {
     class SortedIntArray : IntArray
     {
+        public override void Add(int element)
+        {
+            Insert(BinarySearch(element), element);
+        }
+
         public int BinarySearch(int element)
         {
             int start = 0;

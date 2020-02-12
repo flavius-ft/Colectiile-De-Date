@@ -7,10 +7,12 @@ namespace ColectiiDeDate
         [Fact]
         public void InsertAnElementInASortedArray()
         {
-            var array = new IntArray();
-            array.Add(1);
+            var sortArray = new SortedIntArray();
+            sortArray.Add(3);
+            sortArray.Add(2);
+            sortArray.Add(1);
 
-            Assert.True(array.Contains(1));
+            Assert.Equal(1, sortArray[0]);
         }
     }
 }

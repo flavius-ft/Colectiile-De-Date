@@ -13,13 +13,13 @@ namespace ColectiiDeDate
 
         public int Count { get; private set; }
 
-        public virtual int this[int index]
+        public int this[int index]
         {
             get => array[index];
             set => array[index] = value;
         }
 
-        public void Add(int element)
+        public virtual void Add(int element)
         {
             Resize();
             array[Count] = element;
@@ -44,7 +44,7 @@ namespace ColectiiDeDate
             return -1;
         }
 
-        public void Insert(int index, int element)
+        public virtual void Insert(int index, int element)
         {
             Resize();
             ShiftRight(index);
@@ -68,16 +68,6 @@ namespace ColectiiDeDate
             Count--;
         }
 
-        internal void Resize()
-        {
-            if (Count != array.Length)
-            {
-                return;
-            }
-
-            Array.Resize(ref array, array.Length * 2);
-        }
-
         internal void ShiftRight(int index)
         {
             for (int i = array.Length - 1; i > index; i--)
@@ -92,6 +82,16 @@ namespace ColectiiDeDate
             {
                 array[i] = array[i + 1];
             }
+        }
+
+        private void Resize()
+        {
+            if (Count != array.Length)
+            {
+                return;
+            }
+
+            Array.Resize(ref array, array.Length * 2);
         }
     }
 }
