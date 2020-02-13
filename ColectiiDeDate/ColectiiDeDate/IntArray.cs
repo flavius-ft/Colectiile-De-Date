@@ -50,6 +50,7 @@ namespace ColectiiDeDate
             ShiftRight(index);
 
             array[index] = element;
+            Count++;
         }
 
         public void Clear()
