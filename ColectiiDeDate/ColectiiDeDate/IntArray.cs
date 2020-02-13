@@ -13,7 +13,7 @@ namespace ColectiiDeDate
 
         public int Count { get; private set; }
 
-        public int this[int index]
+        public virtual int this[int index]
         {
             get => array[index];
             set => array[index] = value;
@@ -87,7 +87,7 @@ namespace ColectiiDeDate
 
         private void Resize()
         {
-            if (Count != array.Length)
+            if (Count != array.Length - 1)
             {
                 return;
             }
