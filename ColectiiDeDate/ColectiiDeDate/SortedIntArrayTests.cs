@@ -55,5 +55,58 @@ namespace ColectiiDeDate
 
             Assert.Equal(5, sortArray[3]);
         }
+
+        [Fact]
+        public void SetElementInSortedArrayReturnFalse()
+        {
+            var sortArray = new SortedIntArray();
+            sortArray.Add(1);
+            sortArray.Add(2);
+            sortArray.Add(3);
+
+            sortArray[1] = 4;
+
+            Assert.False(sortArray.Contains(4));
+        }
+
+        [Fact]
+        public void SetElementInSortedArrayReturnTrue()
+        {
+            var sortArray = new SortedIntArray();
+            sortArray.Add(1);
+            sortArray.Add(3);
+            sortArray.Add(5);
+
+            sortArray[1] = 4;
+
+            Assert.True(sortArray.Contains(4));
+        }
+
+        [Fact]
+        public void SetElementInSortedArrayOnFirstPositionReturnTrue()
+        {
+            var sortArray = new SortedIntArray();
+            sortArray.Add(2);
+            sortArray.Add(3);
+            sortArray.Add(5);
+
+            sortArray[0] = 1;
+
+            Assert.True(sortArray.Contains(1));
+        }
+
+        [Fact]
+        public void SetElementInSortedArrayOnLastPosition()
+        {
+            var sortArray = new SortedIntArray();
+            sortArray.Add(2);
+            sortArray.Add(3);
+            sortArray.Add(5);
+            sortArray.Add(6);
+
+            sortArray[3] = 7;
+
+            Assert.Equal(7, sortArray[3]);
+        }
     }
 }

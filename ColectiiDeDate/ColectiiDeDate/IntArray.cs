@@ -87,7 +87,7 @@ namespace ColectiiDeDate
 
         private void Resize()
         {
-            if (Count != array.Length - 1)
+            if (Count != array.Length)
             {
                 return;
             }

@@ -4,8 +4,21 @@
     {
         public override int this[int index]
         {
-            get => base[index];
-            set => base[index] = value;
+            set
+                {
+                bool indexIsFirst = index == 0 && value <= this[index];
+                bool indexIsLast = index == (Count - 1) && value >= this[index];
+                bool limits = indexIsFirst || indexIsLast;
+
+                if (limits)
+                {
+                base[index] = value;
+                }
+                 else if (value <= this[index + 1] && value >= this[index - 1])
+                {
+                base[index] = value;
+                }
+            }
         }
 
         public override void Add(int element)
@@ -14,7 +27,7 @@
         }
 
         public override void Insert(int index, int element)
-            {
+        {
             if (index != BinarySearch(element))
             {
                 return;
