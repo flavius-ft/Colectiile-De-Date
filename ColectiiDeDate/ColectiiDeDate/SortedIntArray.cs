@@ -5,17 +5,12 @@
         public override int this[int index]
         {
             set
+            {
+                if (value >= GetElement(index - 1, value)
+                    && value <= GetElement(index + 1, value))
                 {
-                bool indexIsFirst = index == 0 && value <= this[index];
-                bool indexIsLast = index == (Count - 1) && value >= this[index];
-                bool limits = indexIsFirst || indexIsLast;
-
-                if (!limits && (value > this[index + 1] || value < this[index - 1]))
-                {
-                    return;
+                    base[index] = value;
                 }
-
-                base[index] = value;
             }
         }
 
@@ -67,6 +62,13 @@
             }
 
             return Count;
+        }
+
+        private int GetElement(int index, int defaultValue)
+        {
+            return index >= 0 && index < Count
+                ? base[index]
+                : defaultValue;
         }
     }
 }
