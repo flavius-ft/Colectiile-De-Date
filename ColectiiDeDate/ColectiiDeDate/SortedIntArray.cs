@@ -10,14 +10,12 @@
                 bool indexIsLast = index == (Count - 1) && value >= this[index];
                 bool limits = indexIsFirst || indexIsLast;
 
-                if (limits)
+                if (!limits && (value > this[index + 1] || value < this[index - 1]))
                 {
-                base[index] = value;
+                    return;
                 }
-                 else if (value <= this[index + 1] && value >= this[index - 1])
-                {
+
                 base[index] = value;
-                }
             }
         }
 
