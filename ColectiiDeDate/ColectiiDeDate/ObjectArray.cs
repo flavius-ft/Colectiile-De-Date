@@ -27,7 +27,7 @@ namespace ColectiiDeDate
 
         public ObjArrayEnum GetEnumerator()
         {
-            return new ObjArrayEnum(array);
+            return new ObjArrayEnum(this);
         }
 
         public virtual void Add(object element)

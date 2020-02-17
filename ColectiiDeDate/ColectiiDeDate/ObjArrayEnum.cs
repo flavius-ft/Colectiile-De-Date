@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 
 namespace ColectiiDeDate
 {
     class ObjArrayEnum : IEnumerator
     {
-        private readonly object[] array;
-        int position = -1;
+        private readonly ObjectArray array;
+        private int position = -1;
 
-        public ObjArrayEnum(object[] array)
+        public ObjArrayEnum(ObjectArray array) : base()
         {
             this.array = array;
         }
@@ -18,7 +17,7 @@ namespace ColectiiDeDate
         public bool MoveNext()
         {
             position++;
-            return position < array.Length;
+            return position < array.Count;
         }
 
         public void Reset()
