@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections;
 
 namespace ColectiiDeDate
 {
-    class ObjectArray
+    class ObjectArray : IEnumerable
     {
         private object[] array;
 
@@ -17,6 +18,16 @@ namespace ColectiiDeDate
         {
             get => array[index];
             set => array[index] = value;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return (IEnumerator)GetEnumerator();
+        }
+
+        public ObjArrayEnum GetEnumerator()
+        {
+            return new ObjArrayEnum(array);
         }
 
         public virtual void Add(object element)
