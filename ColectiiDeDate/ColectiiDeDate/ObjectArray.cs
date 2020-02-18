@@ -1,26 +1,27 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace ColectiiDeDate
 {
-    class ObjectArray : IEnumerable
+    class List<T> : IEnumerable<T>
     {
-        private object[] array;
+        private T[] array;
 
-        public ObjectArray()
+        public List()
         {
-            array = new object[4];
+            array = new T[4];
         }
 
         public int Count { get; private set; }
 
-        public virtual object this[int index]
+        public virtual T this[int index]
         {
             get => array[index];
             set => array[index] = value;
         }
 
-        public IEnumerator GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < Count; i++)
             {
@@ -28,23 +29,33 @@ namespace ColectiiDeDate
             }
         }
 
-        public virtual void Add(object element)
+        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            throw new NotImplementedException();
+        }
+
+        public virtual void Add(T element)
         {
             Resize();
             array[Count] = element;
             Count++;
         }
 
-        public bool Contains(object element)
+        public bool Contains(T element)
         {
             return IndexOf(element) >= 0;
         }
 
-        public int IndexOf(object element)
+        public int IndexOf(T element)
         {
             for (int i = 0; i < Count; i++)
             {
-                if (array[i] == element)
+                if (array[i].Equals(element))
                 {
                     return i;
                 }
@@ -53,7 +64,7 @@ namespace ColectiiDeDate
             return -1;
         }
 
-        public virtual void Insert(int index, object element)
+        public virtual void Insert(int index, T element)
         {
             Resize();
             ShiftRight(index);
@@ -67,7 +78,7 @@ namespace ColectiiDeDate
             Count = 0;
         }
 
-        public void Remove(object element)
+        public void Remove(T element)
         {
             RemoveAt(IndexOf(element));
         }

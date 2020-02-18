@@ -7,7 +7,7 @@ namespace ColectiiDeDate
         [Fact]
         public void EnumerateAnEmptyArray()
         {
-            var array = new ObjectArray();
+            var array = new List<string>();
 
             Assert.Empty(array);
         }
@@ -15,7 +15,7 @@ namespace ColectiiDeDate
         [Fact]
         public void EnumerateAnArrayWithTwoElementsReturnSecondElement()
         {
-            var array = new ObjectArray { 2, 4 };
+            var array = new List<int> { 2, 4 };
 
             var testArray = array.GetEnumerator();
             testArray.MoveNext();
@@ -27,7 +27,7 @@ namespace ColectiiDeDate
         [Fact]
         public void EnumerateAnArrayWithTwoElementsReturnFirstElement()
         {
-            var array = new ObjectArray { 2, 4 };
+            var array = new List<int> { 2, 4 };
 
             var testArray = array.GetEnumerator();
             testArray.MoveNext();
@@ -38,7 +38,7 @@ namespace ColectiiDeDate
         [Fact]
         public void EnumerateAnArrayObjectElementsReturnSecondElement()
         {
-            var array = new ObjectArray { 2, "4", 'd' };
+            var array = new List<object> { 2, "4", 'd' };
 
             var testArray = array.GetEnumerator();
             testArray.MoveNext();
