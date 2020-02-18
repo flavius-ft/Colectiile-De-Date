@@ -34,5 +34,17 @@ namespace ColectiiDeDate
 
             Assert.Equal(2, testArray.Current);
         }
+
+        [Fact]
+        public void EnumerateAnArrayObjectElementsReturnSecondElement()
+        {
+            var array = new ObjectArray { 2, "4", 'd' };
+
+            var testArray = array.GetEnumerator();
+            testArray.MoveNext();
+            testArray.MoveNext();
+
+            Assert.Equal("4", testArray.Current);
+        }
     }
 }
