@@ -34,20 +34,5 @@ namespace ColectiiDeDate
 
             Assert.Equal(2, testArray.Current);
         }
-
-        [Fact]
-        public void EnumerateAnArrayWithTwoElementsAplyResetMethodRetunrNumberOfElements()
-        {
-            var array = new ObjectArray { 2, 4 };
-
-            var testArray = array.GetEnumerator();
-            testArray.MoveNext();
-            testArray.MoveNext();
-
-            testArray.Reset();
-            testArray.MoveNext();
-
-            Assert.Equal(2, testArray.Current);
-        }
     }
 }

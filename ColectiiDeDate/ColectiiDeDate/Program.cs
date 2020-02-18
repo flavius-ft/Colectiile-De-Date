@@ -1,12 +1,9 @@
-﻿using System;
-
-namespace ColectiiDeDate
+﻿namespace ColectiiDeDate
 {
     class Program
     {
         static void Main()
         {
-            Console.WriteLine("Hello World!");
         }
     }
 }

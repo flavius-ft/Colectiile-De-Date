@@ -20,14 +20,12 @@ namespace ColectiiDeDate
             set => array[index] = value;
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
+        public IEnumerator GetEnumerator()
         {
-            return (IEnumerator)GetEnumerator();
-        }
-
-        public ObjArrayEnum GetEnumerator()
-        {
-            return new ObjArrayEnum(this);
+            for (int i = 0; i < Count; i++)
+            {
+                yield return array[i];
+            }
         }
 
         public virtual void Add(object element)
