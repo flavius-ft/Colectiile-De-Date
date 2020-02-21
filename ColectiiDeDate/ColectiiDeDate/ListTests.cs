@@ -1,5 +1,4 @@
-﻿using System;
-using Xunit;
+﻿using Xunit;
 
 namespace ColectiiDeDate
 {
@@ -39,22 +38,6 @@ namespace ColectiiDeDate
             numbers.Remove(3);
 
             Assert.Equal(4, numbers[1]);
-        }
-
-        [Fact]
-        public void ExeptionForGetElementIfIndexIsGreaterThanCount()
-        {
-            var numbers = new List<int> { 2, 3 };
-            const string message = "Elementul nu este initializat";
-
-            try
-            {
-                Assert.True(numbers[2] == 3);
-            }
-            catch (ArgumentException exception)
-            {
-                Assert.Equal(message, exception.Message);
-            }
         }
     }
 }
