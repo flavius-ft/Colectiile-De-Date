@@ -17,7 +17,16 @@ namespace ColectiiDeDate
 
         public virtual T this[int index]
         {
-            get => array[index];
+            get
+            {
+                if (index < Count)
+                {
+                    return array[index];
+                }
+
+                throw new ArgumentException("Elementul nu este initializat");
+            }
+
             set => array[index] = value;
         }
 
