@@ -89,6 +89,11 @@ namespace ColectiiDeDate
 
         public void RemoveAt(int index)
         {
+            if (index > Count - 1)
+            {
+                throw new ArgumentException("HERE IS NO ELEMENT");
+            }
+
             ShiftLeft(index);
             Count--;
         }

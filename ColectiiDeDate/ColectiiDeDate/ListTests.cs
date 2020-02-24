@@ -48,5 +48,13 @@ namespace ColectiiDeDate
 
             Assert.Throws<ArgumentException>(() => numbers[2]);
         }
+
+        [Fact]
+        public void RemoveElementFromSpecificIndex()
+        {
+            var numbers = new List<int> { 2, 3, 4, 5 };
+
+            Assert.Throws<ArgumentException>(() => numbers.RemoveAt(4));
+        }
     }
 }
