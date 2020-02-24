@@ -50,11 +50,19 @@ namespace ColectiiDeDate
         }
 
         [Fact]
-        public void RemoveElementFromSpecificIndex()
+        public void ExceptionRemoveElementFromSpecificIndex()
         {
             var numbers = new List<int> { 2, 3, 4, 5 };
 
             Assert.Throws<ArgumentException>(() => numbers.RemoveAt(4));
+        }
+
+        [Fact]
+        public void ExceptionInsertElementToAnInvalidIndex()
+        {
+            var numbers = new List<int> { 2, 3, 4 };
+
+            Assert.Throws<IndexOutOfRangeException>(() => numbers.Insert(4, 2));
         }
     }
 }

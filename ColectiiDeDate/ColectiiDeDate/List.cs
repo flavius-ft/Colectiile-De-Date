@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ColectiiDeDate
 {
-    class List<T> : IEnumerable<T>
+    class List<T> : IList<T>
     {
         private T[] array;
 
@@ -14,6 +14,8 @@ namespace ColectiiDeDate
         }
 
         public int Count { get; private set; }
+
+        public bool IsReadOnly => ((IList<T>)array).IsReadOnly;
 
         public virtual T this[int index]
         {
@@ -95,7 +97,18 @@ namespace ColectiiDeDate
             }
 
             ShiftLeft(index);
+
             Count--;
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            ((IList<T>)this.array).CopyTo(array, arrayIndex);
+        }
+
+        bool ICollection<T>.Remove(T item)
+        {
+            return ((IList<T>)array).Remove(item);
         }
 
         internal void ShiftRight(int index)
