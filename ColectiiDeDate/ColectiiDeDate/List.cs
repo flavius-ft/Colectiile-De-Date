@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace ColectiiDeDate
 {
-    class List<T> : IEnumerable<T>
+    class List<T> : IList<T>
     {
         private T[] array;
 
@@ -14,6 +14,8 @@ namespace ColectiiDeDate
         }
 
         public int Count { get; private set; }
+
+        public bool IsReadOnly { get; private set; }
 
         public virtual T this[int index]
         {
@@ -27,7 +29,15 @@ namespace ColectiiDeDate
                 throw new ArgumentException("Error");
             }
 
-            set => array[index] = value;
+            set
+            {
+                if (!IsReadOnly && index < Count)
+                {
+                    array[index] = value;
+                }
+
+                throw new ArgumentException("Nu exista elemente in lista");
+            }
         }
 
         public IEnumerator<T> GetEnumerator()
@@ -97,6 +107,35 @@ namespace ColectiiDeDate
             ShiftLeft(index);
 
             Count--;
+        }
+
+        public List<T> CopyList()
+        {
+            List<T> secondArray = new List<T>();
+
+            for (int i = 0; i < Count; i++)
+            {
+                secondArray.Insert(i, array[i]);
+            }
+
+            secondArray.IsReadOnly = true;
+
+            return secondArray;
+        }
+
+        public void CopyTo(T[] secondArray, int arrayIndex)
+        {
+            int k = 0;
+            for (int i = arrayIndex; i < array.Length; i++)
+            {
+                secondArray[k] = array[i];
+                k++;
+            }
+        }
+
+        bool ICollection<T>.Remove(T item)
+        {
+            return ((IList<T>)array).Remove(item);
         }
 
         internal void ShiftRight(int index)

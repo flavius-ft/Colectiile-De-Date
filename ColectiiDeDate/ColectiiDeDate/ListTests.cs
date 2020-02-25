@@ -10,7 +10,7 @@ namespace ColectiiDeDate
         {
             var numbers = new List<int> { 2 };
 
-            Assert.Equal(1, numbers.Count);
+            Assert.Single(numbers);
         }
 
         [Fact]
@@ -18,7 +18,7 @@ namespace ColectiiDeDate
         {
             var numbers = new List<int> { 2, 3, 4, 5 };
 
-            Assert.True(numbers.Contains(5));
+            Assert.Contains(5, numbers);
         }
 
         [Fact]
@@ -39,6 +39,30 @@ namespace ColectiiDeDate
             numbers.Remove(3);
 
             Assert.Equal(4, numbers[1]);
+        }
+
+        [Fact]
+        public void CreateACopyOfArrayFromAspecificIndex()
+        {
+            var numbers = new List<int> { 2, 3, 4, 5 };
+            int[] secondArray = new int[numbers.Count];
+
+            numbers.CopyTo(secondArray, 1);
+
+            Assert.Equal(3, secondArray[0]);
+            Assert.Equal(4, secondArray[1]);
+            Assert.Equal(5, secondArray[2]);
+        }
+
+        [Fact]
+        public void IsReadOnly()
+        {
+            var numbers = new List<int> { 2, 3, 4, 5 };
+
+            var secondArray = numbers.CopyList();
+            secondArray[1] = 6;
+
+            Assert.False(secondArray[1] == 6);
         }
 
         [Fact]
@@ -63,6 +87,14 @@ namespace ColectiiDeDate
             var numbers = new List<int> { 2, 3, 4 };
 
             Assert.Throws<IndexOutOfRangeException>(() => numbers.Insert(4, 2));
+        }
+
+        [Fact]
+        public void ExceptionSetElementWhenCountIs0()
+        {
+            var numbers = new List<int>();
+
+            Assert.Throws<ArgumentException>(() => numbers[1] = 3);
         }
     }
 }
