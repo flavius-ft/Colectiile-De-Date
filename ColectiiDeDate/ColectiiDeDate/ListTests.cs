@@ -115,5 +115,32 @@ namespace ColectiiDeDate
 
             Assert.Throws<NotSupportedException>(() => listIsReadOnly.Clear());
         }
+
+        [Fact]
+        public void ExceptionArgumentNullForCopyToFunction()
+        {
+            var numbers = new List<int> { 2, 3 };
+            int[] second = null;
+
+            Assert.Throws<ArgumentNullException>(() => numbers.CopyTo(second, 0));
+        }
+
+        [Fact]
+        public void ExceptionArgumentOutOfRangeForCopyToFunction()
+        {
+            var numbers = new List<int> { 2, 3 };
+            int[] second = new int[2];
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => numbers.CopyTo(second, -1));
+        }
+
+        [Fact]
+        public void ExceptionArgumentExceptionForCopyToFunction()
+        {
+            var numbers = new List<int> { 2, 3, 4, 5 };
+            int[] second = new int[3];
+
+            Assert.Throws<ArgumentException>(() => numbers.CopyTo(second, 0));
+        }
     }
 }

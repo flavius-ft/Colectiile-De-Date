@@ -138,6 +138,21 @@ namespace ColectiiDeDate
 
         public void CopyTo(T[] secondArray, int arrayIndex)
         {
+            if (secondArray == null)
+            {
+                throw new ArgumentNullException("secondArray");
+            }
+
+            if (arrayIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException("arrayIndex");
+            }
+
+            if (secondArray.Length < array.Length - arrayIndex)
+            {
+                throw new ArgumentException("The number of elements in the source List is greater than the available space");
+            }
+
             int k = 0;
             for (int i = arrayIndex; i < array.Length; i++)
             {
