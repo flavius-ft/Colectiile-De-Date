@@ -55,14 +55,13 @@ namespace ColectiiDeDate
         }
 
         [Fact]
-        public void IsReadOnly()
+        public void ExceptionIsReadOnly()
         {
             var numbers = new List<int> { 2, 3, 4, 5 };
 
-            var secondArray = numbers.CopyList();
-            secondArray[1] = 6;
+            var secondArray = numbers.ListIsReadOnly();
 
-            Assert.False(secondArray[1] == 6);
+            Assert.Throws<NotSupportedException>(() => secondArray[1] = 6);
         }
 
         [Fact]
@@ -95,6 +94,16 @@ namespace ColectiiDeDate
             var numbers = new List<int>();
 
             Assert.Throws<ArgumentException>(() => numbers[1] = 3);
+        }
+
+        [Fact]
+        public void ExceptionNotSuportedForAddFunction()
+        {
+            var numbers = new List<int> { 2, 3 };
+
+            var listIsReadOnly = numbers.ListIsReadOnly();
+
+            Assert.Throws<NotSupportedException>(() => listIsReadOnly.Add(4));
         }
     }
 }

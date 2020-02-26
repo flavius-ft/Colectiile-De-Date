@@ -19,7 +19,14 @@ namespace ColectiiDeDate
 
         public override void Add(T element)
         {
+            if (Count == 0)
+            {
+                base.Insert(0, element);
+            }
+            else
+            {
             Insert(BinarySearch(element), element);
+            }
         }
 
         public override void Insert(int index, T element)

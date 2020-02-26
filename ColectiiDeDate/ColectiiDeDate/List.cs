@@ -21,22 +21,21 @@ namespace ColectiiDeDate
         {
             get
             {
-                if (index < Count)
-                {
                     return array[index];
-                }
-
-                throw new ArgumentException("Error");
             }
 
             set
             {
-                if (!IsReadOnly && index < Count)
+                if (IsReadOnly)
                 {
-                    array[index] = value;
+                    throw new NotSupportedException();
+                }
+                else if (index > Count - 1)
+                {
+                    throw new ArgumentException("");
                 }
 
-                throw new ArgumentException("Nu exista elemente in lista");
+                array[index] = value;
             }
         }
 
@@ -55,6 +54,11 @@ namespace ColectiiDeDate
 
         public virtual void Add(T element)
         {
+            if (IsReadOnly)
+            {
+                throw new NotSupportedException();
+            }
+
             Resize();
             array[Count] = element;
             Count++;
@@ -89,6 +93,11 @@ namespace ColectiiDeDate
 
         public void Clear()
         {
+            if (IsReadOnly)
+            {
+                throw new NotSupportedException();
+            }
+
             Count = 0;
         }
 
@@ -103,13 +112,17 @@ namespace ColectiiDeDate
             {
                 throw new ArgumentException("HERE IS NO ELEMENT");
             }
+            else if (IsReadOnly)
+            {
+                throw new NotSupportedException();
+            }
 
             ShiftLeft(index);
 
             Count--;
         }
 
-        public List<T> CopyList()
+        public List<T> ListIsReadOnly()
         {
             List<T> secondArray = new List<T>();
 
@@ -135,6 +148,11 @@ namespace ColectiiDeDate
 
         bool ICollection<T>.Remove(T item)
         {
+            if (IsReadOnly)
+            {
+                throw new NotSupportedException();
+            }
+
             return ((IList<T>)array).Remove(item);
         }
 
