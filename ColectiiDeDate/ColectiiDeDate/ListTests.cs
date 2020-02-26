@@ -105,5 +105,15 @@ namespace ColectiiDeDate
 
             Assert.Throws<NotSupportedException>(() => listIsReadOnly.Add(4));
         }
+
+        [Fact]
+        public void ExceptionNotSuportedForClearFunction()
+        {
+            var numbers = new List<int> { 2, 3 };
+
+            var listIsReadOnly = numbers.ListIsReadOnly();
+
+            Assert.Throws<NotSupportedException>(() => listIsReadOnly.Clear());
+        }
     }
 }
