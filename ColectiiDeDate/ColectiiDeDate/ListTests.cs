@@ -160,5 +160,15 @@ namespace ColectiiDeDate
 
             Assert.Throws<NotSupportedException>(() => listIsReadOnly.Insert(2, 4));
         }
+
+        [Fact]
+        public void ExceptionNotSuportedForRemoveFunction()
+        {
+            var numbers = new List<int> { 2, 3 };
+
+            var listIsReadOnly = numbers.ListIsReadOnly();
+
+            Assert.Throws<NotSupportedException>(() => listIsReadOnly.Remove(3));
+        }
     }
 }
