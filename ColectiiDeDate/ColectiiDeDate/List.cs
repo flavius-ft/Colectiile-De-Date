@@ -84,6 +84,16 @@ namespace ColectiiDeDate
 
         public virtual void Insert(int index, T element)
         {
+            if (IsReadOnly)
+            {
+                throw new NotSupportedException();
+            }
+
+            if (index < 0 || index > Count)
+            {
+                throw new ArgumentOutOfRangeException("index");
+            }
+
             Resize();
             ShiftRight(index);
 

@@ -142,5 +142,23 @@ namespace ColectiiDeDate
 
             Assert.Throws<ArgumentException>(() => numbers.CopyTo(second, 0));
         }
+
+        [Fact]
+        public void ExceptionArgumentOutOfRangeForInsertFunction()
+        {
+            var numbers = new List<int> { 2, 3 };
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => numbers.Insert(3, 5));
+        }
+
+        [Fact]
+        public void ExceptionNotSuportedForInsertFunction()
+        {
+            var numbers = new List<int> { 2, 3 };
+
+            var listIsReadOnly = numbers.ListIsReadOnly();
+
+            Assert.Throws<NotSupportedException>(() => listIsReadOnly.Insert(2, 4));
+        }
     }
 }
