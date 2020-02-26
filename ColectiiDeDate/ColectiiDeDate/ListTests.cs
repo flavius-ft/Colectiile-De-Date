@@ -170,5 +170,23 @@ namespace ColectiiDeDate
 
             Assert.Throws<NotSupportedException>(() => listIsReadOnly.Remove(3));
         }
+
+        [Fact]
+        public void ExceptionNotSuportedForRemoveAtFunction()
+        {
+            var numbers = new List<int> { 2, 3 };
+
+            var listIsReadOnly = numbers.ListIsReadOnly();
+
+            Assert.Throws<NotSupportedException>(() => listIsReadOnly.RemoveAt(1));
+        }
+
+        [Fact]
+        public void ExceptionArgumentOutOfRangeForRemoveAtFunction()
+        {
+            var numbers = new List<int> { 2, 3 };
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => numbers.RemoveAt(2));
+        }
     }
 }

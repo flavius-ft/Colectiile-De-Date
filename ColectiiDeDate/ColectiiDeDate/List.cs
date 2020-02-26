@@ -113,14 +113,19 @@ namespace ColectiiDeDate
 
         public void Remove(T element)
         {
+            if (IsReadOnly)
+            {
+                throw new NotSupportedException();
+            }
+
             RemoveAt(IndexOf(element));
         }
 
         public void RemoveAt(int index)
         {
-            if (index > Count - 1)
+            if (index > Count - 1 || index < 0)
             {
-                throw new ArgumentException("HERE IS NO ELEMENT");
+                throw new ArgumentOutOfRangeException("index");
             }
             else if (IsReadOnly)
             {
