@@ -52,30 +52,21 @@ namespace ColectiiDeDate
 
         public void CopyTo(T[] array, int arrayIndex)
         {
-            var duplicate = GetArray(this);
-
-            int k = 0;
-            for (int i = arrayIndex; i < duplicate.Length; i++)
-            {
-                array[k] = duplicate[i];
-                k++;
-            }
-        }
-
-        public T[] GetArray(LinkedLists<T> list)
-        {
-            var arrayList = list.GetEnumerator();
-            var array = new T[Count];
+            var arrayList = GetEnumerator();
             int i = 0;
+            int k = 0;
 
             for (Node<T> temp = head.Next; temp != head; temp = temp.Next)
             {
                 arrayList.MoveNext();
-                array[i] = arrayList.Current;
-                i++;
-            }
+                if (k >= arrayIndex)
+                {
+                    array[i] = arrayList.Current;
+                    i++;
+                }
 
-            return array;
+                k++;
+            }
         }
 
         public IEnumerator<T> GetEnumerator()
