@@ -6,17 +6,24 @@ namespace ColectiiDeDate
 {
     class LinkedLists<T> : ICollection<T>
     {
+        private readonly Node head = new Node(null);
+
         public LinkedLists()
         {
         }
 
-        public int Count { get; }
+        public int Count { get; set; }
 
         public bool IsReadOnly { get; }
 
         public void Add(T item)
         {
-            throw new NotImplementedException();
+            Node newElement = new Node(item) { Previous = head.Previous };
+            head.Previous.Next = newElement;
+            head.Previous = newElement;
+            newElement.Next = head;
+
+            Count++;
         }
 
         public void Clear()
@@ -26,7 +33,19 @@ namespace ColectiiDeDate
 
         public bool Contains(T item)
         {
-            throw new NotImplementedException();
+            Node temp = new Node(head);
+
+            while (temp.Next == null)
+            {
+                if (temp.Previous.Equals(item))
+                {
+                    return true;
+                }
+
+                temp = temp.Previous;
+            }
+
+            return false;
         }
 
         public void CopyTo(T[] array, int arrayIndex)

@@ -5,9 +5,12 @@ namespace ColectiiDeDate
     public class LinkedListsTests
     {
         [Fact]
-        public void CrateANewList()
+        public void AddAnElementEndCheckIfIsAdded()
         {
-            Assert.Empty();
+            var list = new LinkedLists<int> { 1 };
+            list.Add(2);
+
+            Assert.Contains(1, list);
         }
     }
 }

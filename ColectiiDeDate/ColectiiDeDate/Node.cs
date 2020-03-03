@@ -1,20 +1,16 @@
-﻿using System;
-
-namespace ColectiiDeDate
+﻿namespace ColectiiDeDate
 {
     class Node
     {
-        public Node(object element, Node next, Node previous)
+        public Node(object element)
         {
-            this.ElementValue = element;
-            this.Next = next;
-            this.Previous = previous;
+            this.Value = element;
         }
-
-        public object ElementValue { get; set; }
 
         public Node Next { get; set; }
 
         public Node Previous { get; set; }
+
+        public object Value { get; set; }
     }
 }
