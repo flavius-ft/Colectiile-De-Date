@@ -68,5 +68,16 @@ namespace ColectiiDeDate
 
             Assert.Equal(3, enumList.Current);
         }
+
+        [Fact]
+        public void CopyALinkedListIntoArray()
+        {
+            var list = new LinkedLists<int> { 1, 2, 3 };
+            const int index = 1;
+            int[] array = new int[list.Count - index];
+            list.CopyTo(array, index);
+
+            Assert.Equal(3, array[1]);
+        }
     }
 }
