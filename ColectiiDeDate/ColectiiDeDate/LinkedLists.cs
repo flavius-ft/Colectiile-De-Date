@@ -35,7 +35,7 @@ namespace ColectiiDeDate
 
         public bool Contains(T item)
         {
-            for (Node temp = head.Next; temp.Next != null; temp = temp.Next)
+            for (Node temp = head.Next; temp != head; temp = temp.Next)
             {
                 if (temp.Value.Equals(item))
                 {
@@ -51,14 +51,14 @@ namespace ColectiiDeDate
             throw new NotImplementedException();
         }
 
-        public IEnumerator GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             throw new NotImplementedException();
         }
 
-        IEnumerator<T> IEnumerable<T>.GetEnumerator()
+        IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return GetEnumerator();
         }
 
         public bool Remove(T item)
