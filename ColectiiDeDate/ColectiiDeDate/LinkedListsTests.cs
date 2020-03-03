@@ -11,6 +11,7 @@ namespace ColectiiDeDate
             list.Add(2);
 
             Assert.Contains(1, list);
+            Assert.Contains(2, list);
         }
     }
 }

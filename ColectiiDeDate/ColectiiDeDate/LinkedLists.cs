@@ -35,16 +35,20 @@ namespace ColectiiDeDate
 
         public bool Contains(T item)
         {
-            Node temp = new Node(head);
-
-            while (temp.Next == null)
+            Node temp = new Node(head)
             {
-                if (temp.Previous.Equals(item))
+                Next = head.Next,
+                Previous = head.Previous
+            };
+
+            while (temp.Next != null)
+            {
+                temp = temp.Next;
+
+                if (temp.Value.Equals(item))
                 {
                     return true;
                 }
-
-                temp = temp.Previous;
             }
 
             return false;
