@@ -41,10 +41,8 @@ namespace ColectiiDeDate
                 Previous = head.Previous
             };
 
-            while (temp.Next != null)
+            for (; temp.Next != null; temp = temp.Next)
             {
-                temp = temp.Next;
-
                 if (temp.Value.Equals(item))
                 {
                     return true;
