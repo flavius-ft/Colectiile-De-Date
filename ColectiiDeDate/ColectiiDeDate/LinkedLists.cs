@@ -6,7 +6,7 @@ namespace ColectiiDeDate
 {
     class LinkedLists<T> : ICollection<T>
     {
-        private readonly Node head = new Node(null);
+        private readonly Node<T> head = new Node<T>();
 
         public LinkedLists()
         {
@@ -20,7 +20,11 @@ namespace ColectiiDeDate
 
         public void Add(T item)
         {
-            Node newElement = new Node(item) { Previous = head.Previous };
+            Node<T> newElement = new Node<T>()
+            {
+                Value = item,
+                Previous = head.Previous
+            };
             head.Previous.Next = newElement;
             head.Previous = newElement;
             newElement.Next = head;
@@ -35,7 +39,7 @@ namespace ColectiiDeDate
 
         public bool Contains(T item)
         {
-            for (Node temp = head.Next; temp != head; temp = temp.Next)
+            for (Node<T> temp = head.Next; temp != head; temp = temp.Next)
             {
                 if (temp.Value.Equals(item))
                 {
@@ -53,7 +57,10 @@ namespace ColectiiDeDate
 
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            for (Node<T> temp = head.Next; temp != head; temp = temp.Next)
+            {
+                yield return temp.Value;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
