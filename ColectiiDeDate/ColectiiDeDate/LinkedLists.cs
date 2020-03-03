@@ -10,6 +10,8 @@ namespace ColectiiDeDate
 
         public LinkedLists()
         {
+            head.Next = head;
+            head.Previous = head;
         }
 
         public int Count { get; set; }
@@ -18,8 +20,7 @@ namespace ColectiiDeDate
 
         public void Add(T item)
         {
-            Node newElement = new Node(item);
-            newElement.Previous = head.Previous;
+            Node newElement = new Node(item) { Previous = head.Previous };
             head.Previous.Next = newElement;
             head.Previous = newElement;
             newElement.Next = head;
