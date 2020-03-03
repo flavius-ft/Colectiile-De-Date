@@ -30,5 +30,43 @@ namespace ColectiiDeDate
 
             Assert.False(answer);
         }
+
+        [Fact]
+        public void EnumerateTheElementsFromListReturnFirstElement()
+        {
+            var list = new LinkedLists<int> { 1 };
+            list.Add(2);
+            list.Add(3);
+
+            var enumList = list.GetEnumerator();
+            enumList.MoveNext();
+
+            Assert.Equal(1, enumList.Current);
+        }
+
+        [Fact]
+        public void EnumerateTheElementsFromListReturnMiddleElement()
+        {
+            var list = new LinkedLists<int> { 1, 2, 3 };
+
+            var enumList = list.GetEnumerator();
+            enumList.MoveNext();
+            enumList.MoveNext();
+
+            Assert.Equal(2, enumList.Current);
+        }
+
+        [Fact]
+        public void EnumerateTheElementsFromListReturnLastElement()
+        {
+            var list = new LinkedLists<int> { 1, 2, 3 };
+
+            var enumList = list.GetEnumerator();
+            enumList.MoveNext();
+            enumList.MoveNext();
+            enumList.MoveNext();
+
+            Assert.Equal(3, enumList.Current);
+        }
     }
 }
