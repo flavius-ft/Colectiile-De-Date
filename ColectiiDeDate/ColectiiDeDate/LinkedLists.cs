@@ -87,6 +87,11 @@ namespace ColectiiDeDate
             return Remove(head.Next.Value);
         }
 
+        public bool RemoveLast()
+        {
+            return Remove(head.Previous.Value);
+        }
+
         public bool Remove(T item)
         {
             for (Node<T> temp = head.Next; temp != head; temp = temp.Next)
