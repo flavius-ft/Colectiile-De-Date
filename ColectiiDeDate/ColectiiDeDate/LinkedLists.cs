@@ -16,6 +16,10 @@ namespace ColectiiDeDate
 
         public int Count { get; set; }
 
+        public Node<T> First { get; set; }
+
+        public Node<T> Last { get; set; }
+
         public bool IsReadOnly { get; }
 
         public void Add(T item)
@@ -32,19 +36,58 @@ namespace ColectiiDeDate
             Count++;
         }
 
+        public void AddFirst(Node<T> firstNode)
+        {
+            AddBefore(head.Next, firstNode);
+            First = firstNode;
+        }
+
+        public void AddFirst(T item)
+        {
+            var newNode = new Node<T> { Value = item };
+
+            AddFirst(newNode);
+        }
+
+        public void AddLast(Node<T> lastNode)
+        {
+            AddBefore(head, lastNode);
+            Last = lastNode;
+        }
+
+        public void AddLast(T item)
+        {
+            Add(item);
+        }
+
         public void AddAfter(Node<T> node, Node<T> newNode)
         {
             newNode.Next = node.Next;
-            newNode.Previous = node.Next.Previous;
+            newNode.Previous = node;
             node.Next.Previous = newNode;
             node.Next = newNode;
+
+            Count++;
         }
 
-        public void AddFter(Node<T> node, T item)
+        public Node<T> AddAfter(T item)
         {
-            Node<T> newNode = new Node<T>() { Value = item };
+            return new Node<T>() { Value = item };
+        }
 
-            AddAfter(node, newNode);
+        public void AddBefore(Node<T> thisNode, Node<T> newNode)
+        {
+            newNode.Next = thisNode;
+            newNode.Previous = thisNode.Previous;
+            thisNode.Previous.Next = newNode;
+            thisNode.Previous = newNode;
+
+            Count++;
+        }
+
+        public Node<T> AddBefore(T item)
+        {
+            return new Node<T>() { Value = item };
         }
 
         public void Clear()
@@ -127,7 +170,7 @@ namespace ColectiiDeDate
             return Remove(FoundNodeBy(item));
         }
 
-        internal Node<T> FoundNodeBy(T item)
+        public Node<T> FoundNodeBy(T item)
         {
             for (Node<T> temp = head.Next; temp != head; temp = temp.Next)
             {

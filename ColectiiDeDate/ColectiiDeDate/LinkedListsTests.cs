@@ -136,5 +136,72 @@ namespace ColectiiDeDate
 
             Assert.True(list.Remove(4));
         }
+
+        [Fact]
+        public void AddNewNodeAfterSpecificNode()
+        {
+            var list = new LinkedLists<int> { 1, 2, 4, 5 };
+            var newNode = new Node<int> { Value = 3 };
+            var array = new int[5];
+
+            list.AddAfter(list.FoundNodeBy(2), newNode);
+            list.CopyTo(array, 0);
+
+            Assert.Equal(3, array[2]);
+        }
+
+        [Fact]
+        public void AddNewItemAfterSpecificNode()
+        {
+            var list = new LinkedLists<int> { 1, 2, 4, 5 };
+            var array = new int[5];
+            var actualNode = list.FoundNodeBy(2);
+            Node<int> newNode = list.AddAfter(3);
+
+            list.AddAfter(actualNode, newNode);
+            list.CopyTo(array, 0);
+
+            Assert.Equal(3, array[2]);
+        }
+
+        [Fact]
+        public void AddNewNodeBeforeSpecificNode()
+        {
+            var list = new LinkedLists<int> { 1, 2, 4, 5 };
+            var newNode = new Node<int> { Value = 3 };
+            var array = new int[5];
+
+            list.AddBefore(list.FoundNodeBy(4), newNode);
+            list.CopyTo(array, 0);
+
+            Assert.Equal(3, array[2]);
+        }
+
+        [Fact]
+        public void AddNewItemBeforSpecificNode()
+        {
+            var list = new LinkedLists<int> { 1, 2, 4, 5 };
+            var array = new int[5];
+            var actualNode = list.FoundNodeBy(4);
+            Node<int> newNode = list.AddBefore(3);
+
+            list.AddBefore(actualNode, newNode);
+            list.CopyTo(array, 0);
+
+            Assert.Equal(3, array[2]);
+        }
+
+        [Fact]
+        public void AddNodeOnFirstPosition()
+        {
+            var list = new LinkedLists<int> { 2, 4, 5 };
+            var array = new int[4];
+            Node<int> newNode = new Node<int> { Value = 1 };
+
+            list.AddFirst(newNode);
+            list.CopyTo(array, 0);
+
+            Assert.Equal(1, array[0]);
+        }
     }
 }
