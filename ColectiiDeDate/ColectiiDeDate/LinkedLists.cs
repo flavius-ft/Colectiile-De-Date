@@ -14,11 +14,11 @@ namespace ColectiiDeDate
             head.Previous = head;
         }
 
-        public int Count { get; set; }
+        public int Count { get; private set; }
 
-        public Node<T> First { get; }
+        public Node<T> First => head.Next;
 
-        public Node<T> Last { get; }
+        public Node<T> Last => head.Previous;
 
         public bool IsReadOnly { get; }
 
