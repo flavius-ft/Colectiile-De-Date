@@ -79,5 +79,13 @@ namespace ColectiiDeDate
 
             Assert.Equal(3, array[1]);
         }
+
+        [Fact]
+        public void RemoveSpecificItemAndReturnTrue()
+        {
+            var list = new LinkedLists<int> { 1, 2, 3, 4, 5 };
+
+            Assert.True(list.Remove(3));
+        }
     }
 }

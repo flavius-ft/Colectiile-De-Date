@@ -84,7 +84,20 @@ namespace ColectiiDeDate
 
         public bool Remove(T item)
         {
-            throw new NotImplementedException();
+            for (Node<T> temp = head.Next; temp != head; temp = temp.Next)
+            {
+                if (temp.Value.Equals(item))
+                {
+                    temp.Previous.Next = temp.Next;
+                    temp.Next.Previous = temp.Previous;
+                    temp.Previous = null;
+                    temp.Next = null;
+                    Count--;
+                    return true;
+                }
+            }
+
+            return false;
         }
     }
 }
