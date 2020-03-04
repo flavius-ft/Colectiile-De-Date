@@ -156,9 +156,8 @@ namespace ColectiiDeDate
             var list = new LinkedLists<int> { 1, 2, 4, 5 };
             var array = new int[5];
             var actualNode = list.FoundNodeBy(2);
-            Node<int> newNode = list.AddAfter(3);
 
-            list.AddAfter(actualNode, newNode);
+            list.AddAfter(actualNode, 3);
             list.CopyTo(array, 0);
 
             Assert.Equal(3, array[2]);
@@ -183,9 +182,8 @@ namespace ColectiiDeDate
             var list = new LinkedLists<int> { 1, 2, 4, 5 };
             var array = new int[5];
             var actualNode = list.FoundNodeBy(4);
-            Node<int> newNode = list.AddBefore(3);
 
-            list.AddBefore(actualNode, newNode);
+            list.AddBefore(actualNode, 3);
             list.CopyTo(array, 0);
 
             Assert.Equal(3, array[2]);
@@ -202,6 +200,19 @@ namespace ColectiiDeDate
             list.CopyTo(array, 0);
 
             Assert.Equal(1, array[0]);
+        }
+
+        [Fact]
+        public void AddNodeOnLastPosition()
+        {
+            var list = new LinkedLists<int> { 2, 4, 5 };
+            var array = new int[4];
+            Node<int> newNode = new Node<int> { Value = 6 };
+
+            list.AddLast(newNode);
+            list.CopyTo(array, 0);
+
+            Assert.Equal(6, array[3]);
         }
     }
 }

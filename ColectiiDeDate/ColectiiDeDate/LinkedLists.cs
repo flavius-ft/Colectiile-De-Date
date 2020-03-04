@@ -57,22 +57,21 @@ namespace ColectiiDeDate
 
         public void AddLast(T item)
         {
-            Add(item);
+            var lastNode = new Node<T> { Value = item };
+            AddBefore(head, lastNode);
+            Last = lastNode;
         }
 
         public void AddAfter(Node<T> node, Node<T> newNode)
         {
-            newNode.Next = node.Next;
-            newNode.Previous = node;
-            node.Next.Previous = newNode;
-            node.Next = newNode;
-
-            Count++;
+            AddBefore(node.Next, newNode);
         }
 
-        public Node<T> AddAfter(T item)
+        public void AddAfter(Node<T> node, T item)
         {
-            return new Node<T>() { Value = item };
+            var newNode = new Node<T>() { Value = item };
+
+            AddAfter(node, newNode);
         }
 
         public void AddBefore(Node<T> thisNode, Node<T> newNode)
@@ -85,9 +84,11 @@ namespace ColectiiDeDate
             Count++;
         }
 
-        public Node<T> AddBefore(T item)
+        public void AddBefore(Node<T> node, T item)
         {
-            return new Node<T>() { Value = item };
+            var newNode = new Node<T>() { Value = item };
+
+            AddBefore(node, newNode);
         }
 
         public void Clear()
