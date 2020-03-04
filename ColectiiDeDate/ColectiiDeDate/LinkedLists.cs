@@ -143,32 +143,42 @@ namespace ColectiiDeDate
 
         public bool RemoveFirst()
         {
-            return Remove(head.Next.Value);
+            First = head.Next.Next;
+            return Remove(head.Next);
         }
 
         public bool RemoveLast()
         {
-            return Remove(head.Previous.Value);
+            Last = head.Previous.Previous;
+            return Remove(head.Previous);
         }
 
         public bool Remove(Node<T> node)
         {
-                if (node != null || FoundNodeBy(node.Value) != null)
-                {
+            if (Count != 0)
+            {
                     node.Previous.Next = node.Next;
                     node.Next.Previous = node.Previous;
                     node.Previous = null;
                     node.Next = null;
                     Count--;
                     return true;
-                }
+            }
 
-                return false;
+            return false;
         }
 
         public bool Remove(T item)
         {
-            return Remove(FoundNodeBy(item));
+            for (Node<T> temp = head.Next; temp != head; temp = temp.Next)
+            {
+                if (temp.Value.Equals(item))
+                {
+                    return Remove(temp);
+                }
+            }
+
+            return false;
         }
 
         public Node<T> FoundNodeBy(T item)
