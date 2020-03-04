@@ -95,5 +95,13 @@ namespace ColectiiDeDate
 
             Assert.False(list.Remove(6));
         }
+
+        [Fact]
+        public void RemoveFirstItemAndReturnTrue()
+        {
+            var list = new LinkedLists<int> { 1, 2, 3, 4, 5 };
+
+            Assert.True(list.RemoveFirst());
+        }
     }
 }

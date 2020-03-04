@@ -82,6 +82,11 @@ namespace ColectiiDeDate
             return GetEnumerator();
         }
 
+        public bool RemoveFirst()
+        {
+            return Remove(head.Next.Value);
+        }
+
         public bool Remove(T item)
         {
             for (Node<T> temp = head.Next; temp != head; temp = temp.Next)
