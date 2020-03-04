@@ -105,12 +105,28 @@ namespace ColectiiDeDate
         }
 
         [Fact]
+        public void RemoveFirstItemAndReturnFalse()
+        {
+            var list = new LinkedLists<int>();
+
+            Assert.False(list.RemoveFirst());
+        }
+
+        [Fact]
         public void RemoveLastItemAndReturnTrue()
         {
             var list = new LinkedLists<int> { 1, 2, 3, 4, 5 };
 
             Assert.True(list.RemoveLast());
             Assert.DoesNotContain(5, list);
+        }
+
+        [Fact]
+        public void RemoveLastItemAndReturnFalse()
+        {
+            var list = new LinkedLists<int>();
+
+            Assert.False(list.RemoveLast());
         }
     }
 }
