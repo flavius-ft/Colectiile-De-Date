@@ -34,7 +34,7 @@ namespace ColectiiDeDate
 
         public void Clear()
         {
-            throw new NotImplementedException();
+            Count = 0;
         }
 
         public bool Contains(T item)
@@ -92,22 +92,37 @@ namespace ColectiiDeDate
             return Remove(head.Previous.Value);
         }
 
+        public bool Remove(Node<T> node)
+        {
+                if (node != null || FoundNodeBy(node.Value) != null)
+                {
+                    node.Previous.Next = node.Next;
+                    node.Next.Previous = node.Previous;
+                    node.Previous = null;
+                    node.Next = null;
+                    Count--;
+                    return true;
+                }
+
+                return false;
+        }
+
         public bool Remove(T item)
+        {
+            return Remove(FoundNodeBy(item));
+        }
+
+        internal Node<T> FoundNodeBy(T item)
         {
             for (Node<T> temp = head.Next; temp != head; temp = temp.Next)
             {
                 if (temp.Value.Equals(item))
                 {
-                    temp.Previous.Next = temp.Next;
-                    temp.Next.Previous = temp.Previous;
-                    temp.Previous = null;
-                    temp.Next = null;
-                    Count--;
-                    return true;
+                    return temp;
                 }
             }
 
-            return false;
+            return null;
         }
     }
 }
