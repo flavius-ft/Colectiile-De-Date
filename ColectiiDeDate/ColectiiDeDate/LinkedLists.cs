@@ -32,6 +32,21 @@ namespace ColectiiDeDate
             Count++;
         }
 
+        public void AddAfter(Node<T> node, Node<T> newNode)
+        {
+            newNode.Next = node.Next;
+            newNode.Previous = node.Next.Previous;
+            node.Next.Previous = newNode;
+            node.Next = newNode;
+        }
+
+        public void AddFter(Node<T> node, T item)
+        {
+            Node<T> newNode = new Node<T>() { Value = item };
+
+            AddAfter(node, newNode);
+        }
+
         public void Clear()
         {
             Count = 0;

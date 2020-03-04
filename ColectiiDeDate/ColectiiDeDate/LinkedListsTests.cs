@@ -128,5 +128,13 @@ namespace ColectiiDeDate
 
             Assert.False(list.RemoveLast());
         }
+
+        [Fact]
+        public void RemoveNodeReturnTrue()
+        {
+            var list = new LinkedLists<int> { 1, 2, 3, 4, 5 };
+
+            Assert.True(list.Remove(4));
+        }
     }
 }
