@@ -80,6 +80,11 @@ namespace ColectiiDeDate
 
         public void Clear()
         {
+            while (head.Next != head)
+            {
+                RemoveLast();
+            }
+
             Count = 0;
         }
 
@@ -137,8 +142,6 @@ namespace ColectiiDeDate
             {
                     node.Previous.Next = node.Next;
                     node.Next.Previous = node.Previous;
-                    node.Previous = null;
-                    node.Next = null;
                     Count--;
                     return true;
             }
