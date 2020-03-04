@@ -74,10 +74,10 @@ namespace ColectiiDeDate
         {
             var list = new LinkedLists<int> { 1, 2, 3 };
             const int index = 1;
-            int[] array = new int[list.Count - index];
+            int[] array = new int[list.Count + index];
             list.CopyTo(array, index);
 
-            Assert.Equal(3, array[1]);
+            Assert.Equal(3, array[3]);
         }
 
         [Fact]

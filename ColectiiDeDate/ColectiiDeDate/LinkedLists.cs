@@ -16,30 +16,20 @@ namespace ColectiiDeDate
 
         public int Count { get; set; }
 
-        public Node<T> First { get; set; }
+        public Node<T> First { get; }
 
-        public Node<T> Last { get; set; }
+        public Node<T> Last { get; }
 
         public bool IsReadOnly { get; }
 
         public void Add(T item)
         {
-            Node<T> newElement = new Node<T>()
-            {
-                Value = item,
-                Previous = head.Previous
-            };
-            head.Previous.Next = newElement;
-            head.Previous = newElement;
-            newElement.Next = head;
-
-            Count++;
+            AddLast(item);
         }
 
         public void AddFirst(Node<T> firstNode)
         {
             AddBefore(head.Next, firstNode);
-            First = firstNode;
         }
 
         public void AddFirst(T item)
@@ -52,14 +42,11 @@ namespace ColectiiDeDate
         public void AddLast(Node<T> lastNode)
         {
             AddBefore(head, lastNode);
-            Last = lastNode;
         }
 
         public void AddLast(T item)
         {
-            var lastNode = new Node<T> { Value = item };
-            AddBefore(head, lastNode);
-            Last = lastNode;
+            AddLast(new Node<T> { Value = item });
         }
 
         public void AddAfter(Node<T> node, Node<T> newNode)
@@ -112,19 +99,12 @@ namespace ColectiiDeDate
         public void CopyTo(T[] array, int arrayIndex)
         {
             var arrayList = GetEnumerator();
-            int i = 0;
-            int k = 0;
+            int i = arrayIndex;
 
-            for (Node<T> temp = head.Next; temp != head; temp = temp.Next)
+            for (; arrayIndex < Count + i; arrayIndex++)
             {
                 arrayList.MoveNext();
-                if (k >= arrayIndex)
-                {
-                    array[i] = arrayList.Current;
-                    i++;
-                }
-
-                k++;
+                array[arrayIndex] = arrayList.Current;
             }
         }
 
@@ -143,13 +123,11 @@ namespace ColectiiDeDate
 
         public bool RemoveFirst()
         {
-            First = head.Next.Next;
             return Remove(head.Next);
         }
 
         public bool RemoveLast()
         {
-            Last = head.Previous.Previous;
             return Remove(head.Previous);
         }
 
