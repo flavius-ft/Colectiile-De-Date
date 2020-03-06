@@ -144,7 +144,7 @@ namespace ColectiiDeDate
             var newNode = new Node<int> { Value = 3 };
             var array = new int[5];
 
-            list.AddAfter(list.FoundNodeBy(2), newNode);
+            list.AddAfter(list.Find(2), newNode);
             list.CopyTo(array, 0);
 
             Assert.Equal(3, array[2]);
@@ -155,7 +155,7 @@ namespace ColectiiDeDate
         {
             var list = new LinkedLists<int> { 1, 2, 4, 5 };
             var array = new int[5];
-            var actualNode = list.FoundNodeBy(2);
+            var actualNode = list.Find(2);
 
             list.AddAfter(actualNode, 3);
             list.CopyTo(array, 0);
@@ -170,7 +170,7 @@ namespace ColectiiDeDate
             var newNode = new Node<int> { Value = 3 };
             var array = new int[5];
 
-            list.AddBefore(list.FoundNodeBy(4), newNode);
+            list.AddBefore(list.Find(4), newNode);
             list.CopyTo(array, 0);
 
             Assert.Equal(3, array[2]);
@@ -181,7 +181,7 @@ namespace ColectiiDeDate
         {
             var list = new LinkedLists<int> { 1, 2, 4, 5 };
             var array = new int[5];
-            var actualNode = list.FoundNodeBy(4);
+            var actualNode = list.Find(4);
 
             list.AddBefore(actualNode, 3);
             list.CopyTo(array, 0);

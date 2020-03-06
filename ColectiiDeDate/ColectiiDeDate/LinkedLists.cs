@@ -162,7 +162,7 @@ namespace ColectiiDeDate
             return false;
         }
 
-        public Node<T> FoundNodeBy(T item)
+        public Node<T> Find(T item)
         {
             for (Node<T> temp = head.Next; temp != head; temp = temp.Next)
             {
