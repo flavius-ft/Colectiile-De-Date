@@ -162,6 +162,19 @@ namespace ColectiiDeDate
             return false;
         }
 
+        public Node<T> FindLast(T item)
+        {
+            for (Node<T> temp = head.Previous; temp != head; temp = temp.Previous)
+            {
+                if (temp.Value.Equals(item))
+                {
+                    return temp;
+                }
+            }
+
+            return null;
+        }
+
         public Node<T> Find(T item)
         {
             for (Node<T> temp = head.Next; temp != head; temp = temp.Next)
