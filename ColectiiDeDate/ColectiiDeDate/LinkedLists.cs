@@ -63,11 +63,6 @@ namespace ColectiiDeDate
 
         public void AddBefore(Node<T> thisNode, Node<T> newNode)
         {
-            if (thisNode.Value == null)
-            {
-                throw new ArgumentNullException("thisNode");
-            }
-
             if (newNode.Value == null)
             {
                 throw new ArgumentNullException("newNode");
@@ -83,6 +78,11 @@ namespace ColectiiDeDate
 
         public void AddBefore(Node<T> node, T item)
         {
+            if (node.Value == null && Count != 0)
+            {
+                throw new ArgumentNullException("node");
+            }
+
             var newNode = new Node<T>() { Value = item };
 
             AddBefore(node, newNode);

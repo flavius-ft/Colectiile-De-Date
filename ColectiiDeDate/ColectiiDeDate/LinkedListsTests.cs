@@ -217,16 +217,16 @@ namespace ColectiiDeDate
         }
 
         [Fact]
-        public void ArgumentNullExceptionOnAddAFterWhenNewNodeIsNull()
+        public void ArgumentNullExceptionOnAddBeforeWhenNodeIsNull()
         {
             var list = new LinkedLists<string> { "2", "4", "5" };
-            var newNode = new Node<string> { Value = null };
+            var node = new Node<string> { Value = null };
 
-            Assert.Throws<ArgumentNullException>(() => list.AddBefore(newNode, "5"));
+            Assert.Throws<ArgumentNullException>(() => list.AddBefore(node, "5"));
         }
 
         [Fact]
-        public void ArgumentNullExceptionOnAddAFterWhenNodeIsNull()
+        public void ArgumentNullExceptionOnAddAfterWhenNewNodeIsNull()
         {
             var list = new LinkedLists<string> { "2", "4", "5" };
             var node = new Node<string> { Value = "4" };
