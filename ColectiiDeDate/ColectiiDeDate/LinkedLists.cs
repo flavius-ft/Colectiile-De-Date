@@ -63,6 +63,16 @@ namespace ColectiiDeDate
 
         public void AddBefore(Node<T> thisNode, Node<T> newNode)
         {
+            if (thisNode.Value == null)
+            {
+                throw new ArgumentNullException("thisNode");
+            }
+
+            if (newNode.Value == null)
+            {
+                throw new ArgumentNullException("newNode");
+            }
+
             newNode.Next = thisNode;
             newNode.Previous = thisNode.Previous;
             thisNode.Previous.Next = newNode;

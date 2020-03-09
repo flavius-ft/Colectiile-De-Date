@@ -1,4 +1,5 @@
 ﻿using Xunit;
+using System;
 
 namespace ColectiiDeDate
 {
@@ -213,6 +214,25 @@ namespace ColectiiDeDate
             list.CopyTo(array, 0);
 
             Assert.Equal(6, array[3]);
+        }
+
+        [Fact]
+        public void ArgumentNullExceptionOnAddAFterWhenNewNodeIsNull()
+        {
+            var list = new LinkedLists<string> { "2", "4", "5" };
+            var newNode = new Node<string> { Value = null };
+
+            Assert.Throws<ArgumentNullException>(() => list.AddBefore(newNode, "5"));
+        }
+
+        [Fact]
+        public void ArgumentNullExceptionOnAddAFterWhenNodeIsNull()
+        {
+            var list = new LinkedLists<string> { "2", "4", "5" };
+            var node = new Node<string> { Value = "4" };
+            var newNode = new Node<string>();
+
+            Assert.Throws<ArgumentNullException>(() => list.AddAfter(node, newNode));
         }
     }
 }
