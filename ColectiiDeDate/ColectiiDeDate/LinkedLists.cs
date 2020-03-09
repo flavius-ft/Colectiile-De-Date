@@ -78,14 +78,14 @@ namespace ColectiiDeDate
 
         public void AddBefore(Node<T> node, T item)
         {
-            if (!Contains(node.Value))
-            {
-                throw new InvalidOperationException();
-            }
-
             if (node.Value == null && Count != 0)
             {
                 throw new ArgumentNullException("node");
+            }
+
+            if (!Contains(node.Value))
+            {
+                throw new InvalidOperationException();
             }
 
             var newNode = new Node<T>() { Value = item };
@@ -178,13 +178,12 @@ namespace ColectiiDeDate
 
             if (Count != 0)
             {
-                    node.Previous.Next = node.Next;
-                    node.Next.Previous = node.Previous;
-                    Count--;
-                    return true;
+                node.Previous.Next = node.Next;
+                node.Next.Previous = node.Previous;
+                Count--;
             }
 
-            return false;
+            return !Contains(node.Value);
         }
 
         public bool Remove(T item)
