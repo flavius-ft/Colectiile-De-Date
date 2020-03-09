@@ -46,7 +46,7 @@ namespace ColectiiDeDate
 
         public void AddLast(T item)
         {
-            AddLast(new Node<T> { Value = item });
+            AddLast(new Node<T> { Value = item, List = this });
         }
 
         public void AddAfter(Node<T> node, Node<T> newNode)
@@ -56,7 +56,7 @@ namespace ColectiiDeDate
 
         public void AddAfter(Node<T> node, T item)
         {
-            var newNode = new Node<T>() { Value = item };
+            var newNode = new Node<T>() { Value = item, List = this };
 
             AddAfter(node, newNode);
         }
@@ -66,6 +66,11 @@ namespace ColectiiDeDate
             if (newNode.Value == null)
             {
                 throw new ArgumentNullException("newNode");
+            }
+
+            if (newNode.List != this)
+            {
+                throw new InvalidOperationException();
             }
 
             newNode.Next = thisNode;
@@ -83,12 +88,12 @@ namespace ColectiiDeDate
                 throw new ArgumentNullException("node");
             }
 
-            if (!Contains(node.Value))
+            if (node.List != this)
             {
                 throw new InvalidOperationException();
             }
 
-            var newNode = new Node<T>() { Value = item };
+            var newNode = new Node<T>() { Value = item, List = this };
 
             AddBefore(node, newNode);
         }
@@ -176,12 +181,9 @@ namespace ColectiiDeDate
                 throw new InvalidOperationException();
             }
 
-            if (Count != 0)
-            {
-                node.Previous.Next = node.Next;
-                node.Next.Previous = node.Previous;
-                Count--;
-            }
+            node.Previous.Next = node.Next;
+            node.Next.Previous = node.Previous;
+            Count--;
 
             return !Contains(node.Value);
         }

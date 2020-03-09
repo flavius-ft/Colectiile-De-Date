@@ -126,7 +126,7 @@ namespace ColectiiDeDate
         public void AddNewNodeAfterSpecificNode()
         {
             var list = new LinkedLists<int> { 1, 2, 4, 5 };
-            var newNode = new Node<int> { Value = 3 };
+            var newNode = new Node<int> { Value = 3, List = list };
             var array = new int[5];
 
             list.AddAfter(list.Find(2), newNode);
@@ -152,7 +152,7 @@ namespace ColectiiDeDate
         public void AddNewNodeBeforeSpecificNode()
         {
             var list = new LinkedLists<int> { 1, 2, 4, 5 };
-            var newNode = new Node<int> { Value = 3 };
+            var newNode = new Node<int> { Value = 3, List = list };
             var array = new int[5];
 
             list.AddBefore(list.Find(4), newNode);
@@ -179,7 +179,7 @@ namespace ColectiiDeDate
         {
             var list = new LinkedLists<int> { 2, 4, 5 };
             var array = new int[4];
-            Node<int> newNode = new Node<int> { Value = 1 };
+            Node<int> newNode = new Node<int> { Value = 1, List = list };
 
             list.AddFirst(newNode);
             list.CopyTo(array, 0);
@@ -192,7 +192,7 @@ namespace ColectiiDeDate
         {
             var list = new LinkedLists<int> { 2, 4, 5 };
             var array = new int[4];
-            Node<int> newNode = new Node<int> { Value = 6 };
+            Node<int> newNode = new Node<int> { Value = 6, List = list };
 
             list.AddLast(newNode);
             list.CopyTo(array, 0);
@@ -271,7 +271,10 @@ namespace ColectiiDeDate
         public void AddBeforeInvalidOperationExceptionNodeBelongsToAnOtheList()
         {
             var list = new LinkedLists<string> { "1", "2" };
-            var node = new Node<string> { Value = "3" };
+            var secondList = new LinkedLists<string>();
+            var node = new Node<string> { Value = "3", List = secondList };
+            secondList.Add("4");
+            secondList.AddBefore(secondList.Find("4"), node);
 
             Assert.Throws<InvalidOperationException>(() => list.AddBefore(node, "5"));
         }
