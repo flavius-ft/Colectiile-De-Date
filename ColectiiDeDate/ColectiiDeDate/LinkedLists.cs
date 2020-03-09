@@ -90,10 +90,8 @@ namespace ColectiiDeDate
 
         public void Clear()
         {
-            while (head.Next != head)
-            {
-                RemoveLast();
-            }
+            head.Next = head;
+            head.Previous = head;
 
             Count = 0;
         }
