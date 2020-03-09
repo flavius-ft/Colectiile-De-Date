@@ -78,6 +78,11 @@ namespace ColectiiDeDate
 
         public void AddBefore(Node<T> node, T item)
         {
+            if (!Contains(node.Value))
+            {
+                throw new InvalidOperationException();
+            }
+
             if (node.Value == null && Count != 0)
             {
                 throw new ArgumentNullException("node");

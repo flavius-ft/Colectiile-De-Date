@@ -282,5 +282,14 @@ namespace ColectiiDeDate
 
             Assert.Throws<InvalidOperationException>(() => list.Remove(node));
         }
+
+        [Fact]
+        public void AddBeforeInvalidOperationExceptionNodeBelongsToAnOtheList()
+        {
+            var list = new LinkedLists<string> { "1", "2" };
+            var node = new Node<string> { Value = "3" };
+
+            Assert.Throws<InvalidOperationException>(() => list.AddBefore(node, "5"));
+        }
     }
 }
