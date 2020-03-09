@@ -111,6 +111,21 @@ namespace ColectiiDeDate
 
         public void CopyTo(T[] array, int arrayIndex)
         {
+            if (array == null)
+            {
+                throw new ArgumentNullException("array");
+            }
+
+            if (arrayIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException("arrayIndex");
+            }
+
+            if (array.Length < Count + arrayIndex)
+            {
+                throw new ArgumentException("TheNumberOfElementsIsGreaterThanAvailableSpace");
+            }
+
             var arrayList = GetEnumerator();
             int i = arrayIndex;
 

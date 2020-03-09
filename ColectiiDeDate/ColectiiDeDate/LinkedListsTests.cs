@@ -234,5 +234,35 @@ namespace ColectiiDeDate
 
             Assert.Throws<ArgumentNullException>(() => list.AddAfter(node, newNode));
         }
+
+        [Fact]
+        public void ArgumentNullExceptionOnCopyToMethod()
+        {
+            var list = new LinkedLists<int> { 1, 2, 4, 5 };
+            const int index = 1;
+            int[] array = null;
+
+            Assert.Throws<ArgumentNullException>(() => list.CopyTo(array, index));
+        }
+
+        [Fact]
+        public void CopyToArgumentOutOfRangeException()
+        {
+            var list = new LinkedLists<int> { 1, 2, 4, 5 };
+            const int index = -1;
+            int[] array = new int[list.Count + index];
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => list.CopyTo(array, index));
+        }
+
+        [Fact]
+        public void CopyToArgumentExceptionTheNumberOfElementsIsGreaterThanAvailableSpace()
+        {
+            var list = new LinkedLists<int> { 1, 2, 4, 5 };
+            const int index = 2;
+            int[] array = new int[list.Count];
+
+            Assert.Throws<ArgumentException>(() => list.CopyTo(array, index));
+        }
     }
 }
