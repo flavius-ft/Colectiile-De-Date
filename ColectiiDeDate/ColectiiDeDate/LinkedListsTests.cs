@@ -264,5 +264,23 @@ namespace ColectiiDeDate
 
             Assert.Throws<ArgumentException>(() => list.CopyTo(array, index));
         }
+
+        [Fact]
+        public void RemoveArgumentNullException()
+        {
+            var list = new LinkedLists<string> { "1", "2" };
+            var node = new Node<string>();
+
+            Assert.Throws<ArgumentNullException>(() => list.Remove(node));
+        }
+
+        [Fact]
+        public void RemoveInvalidOperationException()
+        {
+            var list = new LinkedLists<string> { "1", "2" };
+            var node = new Node<string> { Value = "3" };
+
+            Assert.Throws<InvalidOperationException>(() => list.Remove(node));
+        }
     }
 }

@@ -161,6 +161,16 @@ namespace ColectiiDeDate
 
         public bool Remove(Node<T> node)
         {
+            if (node.Value == null)
+            {
+                throw new ArgumentNullException("node");
+            }
+
+            if (!Contains(node.Value))
+            {
+                throw new InvalidOperationException();
+            }
+
             if (Count != 0)
             {
                     node.Previous.Next = node.Next;
