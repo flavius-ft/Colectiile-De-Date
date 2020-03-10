@@ -34,7 +34,7 @@ namespace ColectiiDeDate
 
         public void AddFirst(T item)
         {
-            var newNode = new Node<T> { Value = item };
+            var newNode = new Node<T> { Value = item, List = this };
 
             AddFirst(newNode);
         }
@@ -176,7 +176,7 @@ namespace ColectiiDeDate
                 throw new ArgumentNullException("node");
             }
 
-            if (!Contains(node.Value))
+            if (node.List != this)
             {
                 throw new InvalidOperationException();
             }
