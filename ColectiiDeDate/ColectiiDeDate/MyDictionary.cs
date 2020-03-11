@@ -37,7 +37,7 @@ namespace ColectiiDeDate
                 Next = buckets[HashCode(key)]
             };
 
-            buckets[key.GetHashCode()] = Count;
+            buckets[HashCode(key)] = Count;
 
             Count++;
         }
@@ -54,22 +54,22 @@ namespace ColectiiDeDate
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            int bucketIndex = HashCode(item.Key);
+            return ContainsKey(item.Key);
+        }
+
+        public bool ContainsKey(TKey key)
+        {
+            int bucketIndex = HashCode(key);
 
             for (int elementIndex = buckets[bucketIndex]; elementIndex != -1; elementIndex = elements[elementIndex].Next)
             {
-                if (elements[elementIndex].Key.Equals(item.Key))
+                if (elements[elementIndex].Key.Equals(key))
                 {
                     return true;
                 }
             }
 
             return false;
-        }
-
-        public bool ContainsKey(TKey key)
-        {
-            throw new System.NotImplementedException();
         }
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
