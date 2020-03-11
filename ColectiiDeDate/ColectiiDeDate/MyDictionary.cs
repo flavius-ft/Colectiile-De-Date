@@ -55,18 +55,13 @@ namespace ColectiiDeDate
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
             int bucketIndex = HashCode(item.Key);
-            int bucketValue = buckets[bucketIndex];
-            int elementIndex = bucketValue;
-            if (bucketValue != -1)
-            {
-                while (elementIndex != -1)
-                {
-                    if (elements[elementIndex].Key.Equals(item.Key))
-                    {
-                        return true;
-                    }
+            int elementIndex = buckets[bucketIndex];
 
-                    elementIndex = elements[elementIndex].Next;
+            for (; elementIndex != -1; elementIndex = elements[elementIndex].Next)
+            {
+                if (elements[elementIndex].Key.Equals(item.Key))
+                {
+                    return true;
                 }
             }
 
