@@ -54,7 +54,7 @@ namespace ColectiiDeDate
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            return ContainsKey(item.Key);
+            return TryGetValue(item.Key, out TValue val) && val.Equals(item.Value);
         }
 
         public bool ContainsKey(TKey key)
@@ -94,12 +94,24 @@ namespace ColectiiDeDate
 
         public bool TryGetValue(TKey key, out TValue value)
         {
-            throw new System.NotImplementedException();
+            int bucketIndex = HashCode(key);
+
+            for (int elementIndex = buckets[bucketIndex]; elementIndex != -1; elementIndex = elements[elementIndex].Next)
+            {
+                if (elements[elementIndex].Key.Equals(key))
+                {
+                    value = elements[elementIndex].Value;
+                    return true;
+                }
+            }
+
+            value = default(TValue);
+            return false;
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            return GetEnumerator();
         }
 
         internal int HashCode(TKey key)
