@@ -1,23 +1,45 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace ColectiiDeDate
 {
     class MyDictionary<TKey, TValue> : IDictionary<TKey, TValue>
     {
-        public ICollection<TKey> Keys => throw new System.NotImplementedException();
+        private readonly int[] buckets;
 
-        public ICollection<TValue> Values => throw new System.NotImplementedException();
+        private readonly Elements<TKey, TValue>[] elements;
+
+        public MyDictionary(int length)
+        {
+            buckets = new int[length];
+            Array.Fill(buckets, -1);
+
+            elements = new Elements<TKey, TValue>[length];
+        }
+
+        public ICollection<TKey> Keys { get; }
+
+        public ICollection<TValue> Values { get; }
 
         public int Count { get; set; }
 
-        public bool IsReadOnly => throw new System.NotImplementedException();
+        public bool IsReadOnly { get; set; }
 
         public TValue this[TKey key] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
 
         public void Add(TKey key, TValue value)
         {
-            throw new System.NotImplementedException();
+            elements[Count] = new Elements<TKey, TValue>
+            {
+                Key = key,
+                Value = value,
+                Next = buckets[HashCode(key)]
+            };
+
+            buckets[key.GetHashCode()] = Count;
+
+            Count++;
         }
 
         public void Add(KeyValuePair<TKey, TValue> item)
@@ -32,7 +54,23 @@ namespace ColectiiDeDate
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
-            throw new System.NotImplementedException();
+            int bucketIndex = HashCode(item.Key);
+            int bucketValue = buckets[bucketIndex];
+            int elementIndex = bucketValue;
+            if (bucketValue != -1)
+            {
+                while (elementIndex != -1)
+                {
+                    if (elements[elementIndex].Key.Equals(item.Key))
+                    {
+                        return true;
+                    }
+
+                    elementIndex = elements[elementIndex].Next;
+                }
+            }
+
+            return false;
         }
 
         public bool ContainsKey(TKey key)
@@ -68,6 +106,11 @@ namespace ColectiiDeDate
         IEnumerator IEnumerable.GetEnumerator()
         {
             throw new System.NotImplementedException();
+        }
+
+        internal int HashCode(TKey key)
+        {
+            return key.GetHashCode() % buckets.Length;
         }
     }
 }
