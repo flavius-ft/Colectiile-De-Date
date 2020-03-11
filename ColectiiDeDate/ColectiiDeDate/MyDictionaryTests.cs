@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Xunit;
 
 namespace ColectiiDeDate
@@ -9,7 +8,10 @@ namespace ColectiiDeDate
         [Fact]
         public void AddAnElementToBucketAndCheckIfContainsTheKey()
         {
-            var mydictionary = new MyDictionary(5);
+            var dictionary = new MyDictionary<int, string>(5) { { 2, "a" } };
+            KeyValuePair<int, string> item = new KeyValuePair<int, string>(2, "a");
+
+            Assert.Contains(item, dictionary);
         }
     }
 }

@@ -44,7 +44,7 @@ namespace ColectiiDeDate
 
         public void Add(KeyValuePair<TKey, TValue> item)
         {
-            throw new System.NotImplementedException();
+            Add(item.Key, item.Value);
         }
 
         public void Clear()
@@ -55,9 +55,8 @@ namespace ColectiiDeDate
         public bool Contains(KeyValuePair<TKey, TValue> item)
         {
             int bucketIndex = HashCode(item.Key);
-            int elementIndex = buckets[bucketIndex];
 
-            for (; elementIndex != -1; elementIndex = elements[elementIndex].Next)
+            for (int elementIndex = buckets[bucketIndex]; elementIndex != -1; elementIndex = elements[elementIndex].Next)
             {
                 if (elements[elementIndex].Key.Equals(item.Key))
                 {
