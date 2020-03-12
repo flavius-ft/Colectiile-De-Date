@@ -10,6 +10,8 @@ namespace ColectiiDeDate
 
         private readonly Elements<TKey, TValue>[] elements;
 
+        private int freeIndex = -1;
+
         public MyDictionary(int length)
         {
             buckets = new int[length];
@@ -84,12 +86,42 @@ namespace ColectiiDeDate
 
         public bool Remove(TKey key)
         {
-            throw new System.NotImplementedException();
+            if (TryGetValue(key, out TValue val))
+            {
+                Remove(new KeyValuePair<TKey, TValue>(key, val));
+            }
+
+            return false;
         }
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
-            throw new System.NotImplementedException();
+            int bucketIndex = HashCode(item.Key);
+            int index = buckets[bucketIndex];
+
+            for (int elementIndex = elements[index].Next; elementIndex != -1;
+            elementIndex = elements[elementIndex].Next)
+            {
+                if (elements[elementIndex].Key.Equals(item.Key))
+                {
+                    elements[index].Next = elements[elementIndex].Next;
+
+                    index = elementIndex;
+                }
+            }
+
+            if (elements[index].Key.Equals(item.Key))
+            {
+                elements[index].Key = default(TKey);
+                elements[index].Value = default(TValue);
+                buckets[bucketIndex] = elements[index].Next;
+                elements[index].Next = freeIndex;
+                freeIndex = index;
+
+                return true;
+            }
+
+            return false;
         }
 
         public bool TryGetValue(TKey key, out TValue value)
