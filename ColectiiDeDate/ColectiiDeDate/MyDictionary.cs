@@ -32,14 +32,29 @@ namespace ColectiiDeDate
 
         public void Add(TKey key, TValue value)
         {
-            elements[Count] = new Elements<TKey, TValue>
+            if (freeIndex != -1)
             {
-                Key = key,
-                Value = value,
-                Next = buckets[HashCode(key)]
-            };
+                elements[freeIndex] = new Elements<TKey, TValue>
+                {
+                    Key = key,
+                    Value = value,
+                    Next = buckets[HashCode(key)]
+                };
 
-            buckets[HashCode(key)] = Count;
+                buckets[HashCode(key)] = freeIndex;
+
+                freeIndex = elements[freeIndex].Next;
+            }
+            else
+            {
+                elements[Count] = new Elements<TKey, TValue>
+                {
+                    Key = key,
+                    Value = value,
+                    Next = buckets[HashCode(key)]
+                };
+                buckets[HashCode(key)] = Count;
+            }
 
             Count++;
         }
@@ -51,7 +66,8 @@ namespace ColectiiDeDate
 
         public void Clear()
         {
-            throw new System.NotImplementedException();
+            Count = 0;
+            Array.Fill(buckets, -1);
         }
 
         public bool Contains(KeyValuePair<TKey, TValue> item)
@@ -61,17 +77,8 @@ namespace ColectiiDeDate
 
         public bool ContainsKey(TKey key)
         {
-            int bucketIndex = HashCode(key);
-
-            for (int elementIndex = buckets[bucketIndex]; elementIndex != -1; elementIndex = elements[elementIndex].Next)
-            {
-                if (elements[elementIndex].Key.Equals(key))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            var item = SearchElement(key);
+            return item.Key.Equals(key);
         }
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
@@ -81,7 +88,16 @@ namespace ColectiiDeDate
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
         {
-            throw new System.NotImplementedException();
+            for (int i = 0; i < buckets.Length; i++)
+            {
+                if (buckets[i] != -1)
+                {
+                    for (int elemIndex = buckets[i]; elemIndex != -1; elemIndex = elements[elemIndex].Next)
+                    {
+                        yield return new KeyValuePair<TKey, TValue>(elements[elemIndex].Key, elements[elemIndex].Value);
+                    }
+                }
+            }
         }
 
         public bool Remove(TKey key)
@@ -126,24 +142,36 @@ namespace ColectiiDeDate
 
         public bool TryGetValue(TKey key, out TValue value)
         {
+            var element = SearchElement(key);
+
+            if (element.Key.Equals(default(TKey)))
+            {
+                value = default(TValue);
+                return false;
+            }
+
+            value = element.Value;
+            return true;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        internal KeyValuePair<TKey, TValue> SearchElement(TKey key)
+        {
             int bucketIndex = HashCode(key);
 
             for (int elementIndex = buckets[bucketIndex]; elementIndex != -1; elementIndex = elements[elementIndex].Next)
             {
                 if (elements[elementIndex].Key.Equals(key))
                 {
-                    value = elements[elementIndex].Value;
-                    return true;
+                    return new KeyValuePair<TKey, TValue>(elements[elementIndex].Key, elements[elementIndex].Value);
                 }
             }
 
-            value = default(TValue);
-            return false;
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return GetEnumerator();
+            return new KeyValuePair<TKey, TValue>(default(TKey), default(TValue));
         }
 
         internal int HashCode(TKey key)

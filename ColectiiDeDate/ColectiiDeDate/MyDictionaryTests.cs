@@ -113,5 +113,39 @@ namespace ColectiiDeDate
 
             Assert.False(dictionary.Remove(item4));
         }
+
+        [Fact]
+        public void ClearAlltheBuckets()
+        {
+            KeyValuePair<int, string> item1 = new KeyValuePair<int, string>(2, "a");
+            KeyValuePair<int, string> item2 = new KeyValuePair<int, string>(7, "b");
+            var dictionary = new MyDictionary<int, string>(5)
+            {
+                item1,
+                item2
+            };
+
+            dictionary.Clear();
+
+            Assert.Empty(dictionary);
+        }
+
+        [Fact]
+        public void EnumerateElementsFromBuckets()
+        {
+            KeyValuePair<int, string> item1 = new KeyValuePair<int, string>(2, "a");
+            KeyValuePair<int, string> item2 = new KeyValuePair<int, string>(7, "b");
+            var dictionary = new MyDictionary<int, string>(5)
+            {
+                item1,
+                item2
+            };
+
+            var enumDictionary = dictionary.GetEnumerator();
+            enumDictionary.MoveNext();
+            enumDictionary.MoveNext();
+
+            Assert.Equal(2, enumDictionary.Current.Key);
+        }
     }
 }
