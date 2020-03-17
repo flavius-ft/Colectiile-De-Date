@@ -175,5 +175,41 @@ namespace ColectiiDeDate
 
             Assert.Equal(32, enumerator.Current.Key);
         }
+
+        [Fact]
+        public void CopyToAnOtherArrayTheElementsFromDictionary()
+        {
+            KeyValuePair<int, string> item1 = new KeyValuePair<int, string>(2, "a");
+            KeyValuePair<int, string> item2 = new KeyValuePair<int, string>(7, "b");
+            var dictionary = new MyDictionary<int, string>(5)
+            {
+                item1,
+                item2
+            };
+
+            const int index = 0;
+            KeyValuePair<int, string>[] array = new KeyValuePair<int, string>[dictionary.Count + index];
+            dictionary.CopyTo(array, index);
+
+            Assert.Equal(2, array[1].Key);
+        }
+
+        [Fact]
+        public void CopyToAnOtherArrayFromIndex1()
+        {
+            KeyValuePair<int, string> item1 = new KeyValuePair<int, string>(2, "a");
+            KeyValuePair<int, string> item2 = new KeyValuePair<int, string>(7, "b");
+            var dictionary = new MyDictionary<int, string>(5)
+            {
+                item1,
+                item2
+            };
+
+            const int index = 1;
+            KeyValuePair<int, string>[] array = new KeyValuePair<int, string>[dictionary.Count + index];
+            dictionary.CopyTo(array, index);
+
+            Assert.Equal(7, array[1].Key);
+        }
     }
 }

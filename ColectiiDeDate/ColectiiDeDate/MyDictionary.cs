@@ -75,7 +75,13 @@ namespace ColectiiDeDate
 
         public void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
         {
-            throw new System.NotImplementedException();
+            int i = arrayIndex;
+
+            for (var arrayDictionary = GetEnumerator(); arrayIndex < Count + i; arrayIndex++)
+            {
+                arrayDictionary.MoveNext();
+                array[arrayIndex] = arrayDictionary.Current;
+            }
         }
 
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator()
