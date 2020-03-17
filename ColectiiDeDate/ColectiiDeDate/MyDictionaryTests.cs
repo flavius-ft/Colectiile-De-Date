@@ -155,6 +155,7 @@ namespace ColectiiDeDate
             KeyValuePair<int, string> item2 = new KeyValuePair<int, string>(7, "b");
             KeyValuePair<int, string> item3 = new KeyValuePair<int, string>(12, "c");
             KeyValuePair<int, string> item4 = new KeyValuePair<int, string>(22, "d");
+            KeyValuePair<int, string> item5 = new KeyValuePair<int, string>(32, "e");
 
             var dictionary = new MyDictionary<int, string>(5)
             {
@@ -164,13 +165,15 @@ namespace ColectiiDeDate
             };
 
             dictionary.Remove(item2);
+            dictionary.Remove(item3);
 
             dictionary.Add(item4);
+            dictionary.Add(item5);
 
             var enumerator = dictionary.GetEnumerator();
             enumerator.MoveNext();
 
-            Assert.Equal(22, enumerator.Current.Key);
+            Assert.Equal(32, enumerator.Current.Key);
         }
     }
 }

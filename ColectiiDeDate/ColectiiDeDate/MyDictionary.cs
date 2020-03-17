@@ -34,25 +34,17 @@ namespace ColectiiDeDate
         {
             if (freeIndex != -1)
             {
-                elements[freeIndex] = new Elements<TKey, TValue>
-                {
-                    Key = key,
-                    Value = value,
-                    Next = buckets[HashCode(key)]
-                };
+                int index = elements[freeIndex].Next;
+
+                GetElement(freeIndex, key, value, buckets[HashCode(key)]);
 
                 buckets[HashCode(key)] = freeIndex;
-
-                freeIndex = elements[freeIndex].Next;
+                freeIndex = index;
             }
             else
             {
-                elements[Count] = new Elements<TKey, TValue>
-                {
-                    Key = key,
-                    Value = value,
-                    Next = buckets[HashCode(key)]
-                };
+                GetElement(Count, key, value, buckets[HashCode(key)]);
+
                 buckets[HashCode(key)] = Count;
             }
 
@@ -90,13 +82,10 @@ namespace ColectiiDeDate
         {
             for (int i = 0; i < buckets.Length; i++)
             {
-                if (buckets[i] != -1)
-                {
                     for (int elemIndex = buckets[i]; elemIndex != -1; elemIndex = elements[elemIndex].Next)
                     {
                         yield return new KeyValuePair<TKey, TValue>(elements[elemIndex].Key, elements[elemIndex].Value);
                     }
-                }
             }
         }
 
@@ -122,7 +111,11 @@ namespace ColectiiDeDate
                 {
                     elements[index].Next = elements[elementIndex].Next;
 
-                    index = elementIndex;
+                    elements[elementIndex].Next = freeIndex;
+                    freeIndex = elementIndex;
+                    Count--;
+
+                    return true;
                 }
             }
 
@@ -133,6 +126,7 @@ namespace ColectiiDeDate
                 buckets[bucketIndex] = elements[index].Next;
                 elements[index].Next = freeIndex;
                 freeIndex = index;
+                Count--;
 
                 return true;
             }
@@ -157,6 +151,18 @@ namespace ColectiiDeDate
         IEnumerator IEnumerable.GetEnumerator()
         {
             return GetEnumerator();
+        }
+
+        internal Elements<TKey, TValue> GetElement(int index, TKey key, TValue value, int nextIndex)
+        {
+            elements[index] = new Elements<TKey, TValue>
+            {
+                Key = key,
+                Value = value,
+                Next = nextIndex
+            };
+
+            return elements[index];
         }
 
         internal KeyValuePair<TKey, TValue> SearchElement(TKey key)
