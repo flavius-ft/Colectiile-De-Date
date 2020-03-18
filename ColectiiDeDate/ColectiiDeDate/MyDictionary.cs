@@ -28,7 +28,25 @@ namespace ColectiiDeDate
 
         public bool IsReadOnly { get; set; }
 
-        public TValue this[TKey key] { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public TValue this[TKey key]
+        {
+            get
+            {
+                TryGetValue(key, out TValue val);
+
+                return val;
+            }
+
+            set
+            {
+                if (ContainsKey(key))
+                {
+                    elements[GetElementIndex(key)].Value = value;
+                }
+
+                Add(key, value);
+            }
+        }
 
         public void Add(TKey key, TValue value)
         {
@@ -36,14 +54,14 @@ namespace ColectiiDeDate
             {
                 int index = elements[freeIndex].Next;
 
-                GetElement(freeIndex, key, value, buckets[HashCode(key)]);
+                CreateElement(freeIndex, key, value, buckets[HashCode(key)]);
 
                 buckets[HashCode(key)] = freeIndex;
                 freeIndex = index;
             }
             else
             {
-                GetElement(Count, key, value, buckets[HashCode(key)]);
+                CreateElement(Count, key, value, buckets[HashCode(key)]);
 
                 buckets[HashCode(key)] = Count;
             }
@@ -159,7 +177,22 @@ namespace ColectiiDeDate
             return GetEnumerator();
         }
 
-        internal Elements<TKey, TValue> GetElement(int index, TKey key, TValue value, int nextIndex)
+        internal int GetElementIndex(TKey key)
+        {
+            int bucketIndex = HashCode(key);
+
+            for (int elementIndex = buckets[bucketIndex]; elementIndex != -1; elementIndex = elements[elementIndex].Next)
+            {
+                if (elements[elementIndex].Key.Equals(key))
+                {
+                    return elementIndex;
+                }
+            }
+
+            return -1;
+        }
+
+        internal Elements<TKey, TValue> CreateElement(int index, TKey key, TValue value, int nextIndex)
         {
             elements[index] = new Elements<TKey, TValue>
             {

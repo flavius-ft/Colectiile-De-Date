@@ -211,5 +211,51 @@ namespace ColectiiDeDate
 
             Assert.Equal(7, array[1].Key);
         }
+
+        [Fact]
+        public void GetValueUsingPropertyItemKey()
+        {
+            KeyValuePair<int, string> item1 = new KeyValuePair<int, string>(2, "a");
+            KeyValuePair<int, string> item2 = new KeyValuePair<int, string>(7, "b");
+            var dictionary = new MyDictionary<int, string>(5)
+            {
+                item1,
+                item2
+            };
+
+            Assert.Equal("b", dictionary[item2.Key]);
+        }
+
+        [Fact]
+        public void SetValueUsingPropertyItemKey()
+        {
+            KeyValuePair<int, string> item1 = new KeyValuePair<int, string>(2, "a");
+            KeyValuePair<int, string> item2 = new KeyValuePair<int, string>(7, "b");
+            var dictionary = new MyDictionary<int, string>(5)
+            {
+                item1,
+                item2
+            };
+
+            dictionary[7] = "c";
+
+            Assert.Equal("c", dictionary[item2.Key]);
+        }
+
+        [Fact]
+        public void SetValueUsingPropertyItemKeyWhenKeyIsMissing()
+        {
+            KeyValuePair<int, string> item1 = new KeyValuePair<int, string>(2, "a");
+            KeyValuePair<int, string> item2 = new KeyValuePair<int, string>(7, "b");
+            var dictionary = new MyDictionary<int, string>(5)
+            {
+                item1,
+                item2
+            };
+
+            dictionary[9] = "c";
+
+            Assert.Equal("c", dictionary[9]);
+        }
     }
 }
