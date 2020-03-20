@@ -308,5 +308,15 @@ namespace ColectiiDeDate
 
             Assert.Throws<ArgumentNullException>(() => dictionary.Remove(item));
         }
+
+        [Fact]
+        public void KeyNotFoundException()
+        {
+            KeyValuePair<int, string> item = new KeyValuePair<int, string>(2, "b");
+
+            var dictionary = new MyDictionary<int, string>(5);
+
+            Assert.Throws<KeyNotFoundException>(() => dictionary[3]);
+        }
     }
 }

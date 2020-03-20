@@ -32,7 +32,10 @@ namespace ColectiiDeDate
         {
             get
             {
-                TryGetValue(key, out TValue val);
+                if (!TryGetValue(key, out TValue val))
+                {
+                    throw new KeyNotFoundException();
+                }
 
                 return val;
             }
