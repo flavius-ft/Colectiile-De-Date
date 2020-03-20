@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Xunit;
 
 namespace ColectiiDeDate
@@ -256,6 +257,56 @@ namespace ColectiiDeDate
             dictionary[9] = "c";
 
             Assert.Equal("c", dictionary[9]);
+        }
+
+        [Fact]
+        public void ArgumentNullExceptionAddAnElementWithNullKey()
+        {
+            KeyValuePair<string, string> item = new KeyValuePair<string, string>(null, "b");
+
+            var dictionary = new MyDictionary<string, string>(5);
+
+            Assert.Throws<ArgumentNullException>(() => dictionary.Add(item));
+        }
+
+        [Fact]
+        public void ArgumentExceptionAddAnElementwithDuplicateKey()
+        {
+            KeyValuePair<int, string> item1 = new KeyValuePair<int, string>(2, "a");
+            KeyValuePair<int, string> item2 = new KeyValuePair<int, string>(2, "b");
+            var dictionary = new MyDictionary<int, string>(5) { item1 };
+
+            Assert.Throws<ArgumentException>(() => dictionary.Add(item2));
+        }
+
+        [Fact]
+        public void ArgumentNullExceptionContainsKeyWhenKeyIsNull()
+        {
+            KeyValuePair<string, string> item = new KeyValuePair<string, string>("a", "b");
+
+            var dictionary = new MyDictionary<string, string>(5);
+
+            Assert.Throws<ArgumentNullException>(() => dictionary.ContainsKey(null));
+        }
+
+        [Fact]
+        public void ArgumentNullExceptionRemoveElementSearchingByNullKey()
+        {
+            KeyValuePair<string, string> item = new KeyValuePair<string, string>("a", "b");
+
+            var dictionary = new MyDictionary<string, string>(5);
+
+            Assert.Throws<ArgumentNullException>(() => dictionary.Remove(null));
+        }
+
+        [Fact]
+        public void ArgumentNullExceptionRemovePaireWhenKeyIsNull()
+        {
+            KeyValuePair<string, string> item = new KeyValuePair<string, string>(null, "b");
+
+            var dictionary = new MyDictionary<string, string>(5);
+
+            Assert.Throws<ArgumentNullException>(() => dictionary.Remove(item));
         }
     }
 }

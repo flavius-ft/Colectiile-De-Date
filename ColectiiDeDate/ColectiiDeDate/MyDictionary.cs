@@ -26,7 +26,7 @@ namespace ColectiiDeDate
 
         public int Count { get; set; }
 
-        public bool IsReadOnly { get; set; }
+        public bool IsReadOnly { get; }
 
         public TValue this[TKey key]
         {
@@ -43,13 +43,25 @@ namespace ColectiiDeDate
                 {
                     elements[GetElementIndex(key)].Value = value;
                 }
-
+                else
+                {
                 Add(key, value);
+                }
             }
         }
 
         public void Add(TKey key, TValue value)
         {
+            if (key == null)
+            {
+                throw new ArgumentNullException("key");
+            }
+
+            if (ContainsKey(key))
+            {
+                throw new ArgumentException("The key already exists in the dictionary");
+            }
+
             if (freeIndex != -1)
             {
                 int index = elements[freeIndex].Next;
@@ -87,6 +99,11 @@ namespace ColectiiDeDate
 
         public bool ContainsKey(TKey key)
         {
+            if (key == null)
+            {
+                throw new ArgumentNullException("key");
+            }
+
             var item = SearchElement(key);
             return item.Key.Equals(key);
         }
@@ -125,6 +142,11 @@ namespace ColectiiDeDate
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
         {
+            if (item.Key == null)
+            {
+                throw new ArgumentNullException("item");
+            }
+
             int bucketIndex = HashCode(item.Key);
             int index = buckets[bucketIndex];
 
@@ -160,6 +182,11 @@ namespace ColectiiDeDate
 
         public bool TryGetValue(TKey key, out TValue value)
         {
+            if (key == null)
+            {
+                throw new ArgumentNullException("key");
+            }
+
             var element = SearchElement(key);
 
             if (element.Key.Equals(default(TKey)))
