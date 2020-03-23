@@ -26,11 +26,9 @@ namespace ColectiiDeDate
             {
                 int i = 0;
                 TKey[] keys = new TKey[Count];
-                var getKeys = GetEnumerator();
                 foreach (var key in this)
                 {
-                    getKeys.MoveNext();
-                    keys[i] = getKeys.Current.Key;
+                    keys[i] = key.Key;
                     i++;
                 }
 
@@ -44,11 +42,9 @@ namespace ColectiiDeDate
             {
                 int i = 0;
                 TValue[] values = new TValue[Count];
-                var getValues = GetEnumerator();
                 foreach (var val in this)
                 {
-                    getValues.MoveNext();
-                    values[i] = getValues.Current.Value;
+                    values[i] = val.Value;
                     i++;
                 }
 
