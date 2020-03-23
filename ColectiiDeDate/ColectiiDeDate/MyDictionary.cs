@@ -20,7 +20,22 @@ namespace ColectiiDeDate
             elements = new Elements<TKey, TValue>[length];
         }
 
-        public ICollection<TKey> Keys { get; }
+        public ICollection<TKey> Keys
+        {
+            get
+            {
+                int i = 0;
+                TKey[] keys = new TKey[Count];
+                var getKeys = GetEnumerator();
+                while (getKeys.MoveNext())
+                {
+                    keys[i] = getKeys.Current.Key;
+                    i++;
+                }
+
+                return keys;
+            }
+        }
 
         public ICollection<TValue> Values { get; }
 
