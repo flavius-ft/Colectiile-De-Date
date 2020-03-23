@@ -163,12 +163,12 @@ namespace ColectiiDeDate
 
         public bool Remove(TKey key)
         {
-            if (TryGetValue(key, out TValue val))
+            if (key == null)
             {
-                Remove(new KeyValuePair<TKey, TValue>(key, val));
+                throw new ArgumentNullException("key");
             }
 
-            return false;
+            return Remove(SearchElement(key));
         }
 
         public bool Remove(KeyValuePair<TKey, TValue> item)
