@@ -281,6 +281,27 @@ namespace ColectiiDeDate
         }
 
         [Fact]
+        public void GetValuesFromDictionary()
+        {
+            KeyValuePair<int, string> item1 = new KeyValuePair<int, string>(2, "a");
+            KeyValuePair<int, string> item2 = new KeyValuePair<int, string>(7, "b");
+            KeyValuePair<int, string> item3 = new KeyValuePair<int, string>(12, "c");
+            KeyValuePair<int, string> item4 = new KeyValuePair<int, string>(22, "d");
+            KeyValuePair<int, string> item5 = new KeyValuePair<int, string>(32, "e");
+
+            var dictionary = new MyDictionary<int, string>(5)
+            {
+                item1,
+                item2,
+                item3,
+                item4,
+                item5
+            };
+
+            Assert.Contains("c", dictionary.Values);
+        }
+
+        [Fact]
         public void ArgumentNullExceptionAddAnElementWithNullKey()
         {
             KeyValuePair<string, string> item = new KeyValuePair<string, string>(null, "b");
